@@ -1,0 +1,59 @@
+@import '../../main.scss';
+
+.card-container {
+  background-color: $red-color;
+  color: #fff;
+  height: 14rem;
+  width: 12rem;
+  border-radius: 10px;
+
+  position: relative;
+  transition: 300ms ease-in-out;
+
+  .card-icon {
+    height: 50%;
+    width: 100%;
+
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    top: 20%;
+  }
+
+  .card-title {
+    font-weight: 400;
+
+    position: absolute;
+
+    bottom: 2.2rem;
+    left: 1rem;
+
+    font-size: 1.2rem;
+  }
+
+  .card-title-tagalog {
+    position: absolute;
+    left: 1rem;
+    bottom: 0.8rem;
+    font-size: 0.9rem;
+    opacity: 0;
+  }
+}
+
+.card-container:hover {
+  cursor: pointer;
+  background-color: $yellow-color;
+  color: $blue-color;
+  transform: translateY(-0.8rem);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+
+  .card-title-tagalog {
+    opacity: 1;
+  }
+}
+
+.card-container:active {
+  transform: translateY(0.8rem);
+  box-shadow: none;
+}

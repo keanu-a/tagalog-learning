@@ -1,0 +1,66 @@
+@import '../../main.scss';
+
+.conjugate-header {
+  margin: 1rem 2rem;
+  font-size: 2rem;
+}
+
+.verb-section {
+  margin: 1rem 2rem;
+  border-radius: 10px;
+  width: 48rem;
+  height: 16rem;
+
+  background-color: $red-color;
+  color: #fff;
+
+  position: relative;
+
+  transition: 300ms;
+
+  &:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .verb-header {
+    padding: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .verb-example {
+    padding: 1rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .btn-conjugate {
+    display: flex;
+    color: $blue-color;
+    width: 8rem;
+    height: 2.5rem;
+
+    border-radius: 5px;
+    border: none;
+
+    align-items: center;
+    justify-content: center;
+    background-color: $yellow-color;
+
+    font-family: inherit;
+    font-size: 1.2rem;
+
+    transition: 300ms;
+
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $blue-color;
+      color: $yellow-color;
+    }
+  }
+}
