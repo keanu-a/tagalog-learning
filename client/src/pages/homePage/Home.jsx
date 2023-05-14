@@ -135,8 +135,8 @@ const Home = () => {
         <div className="home-section-header">Variety of Lessons</div>
 
         <div className="home-card-set">
-          {homeCards.map(({ title, tagalog, icon }) => (
-            <Card key={title} title={title} tagalog={tagalog}>
+          {homeCards.map(({ title, tagalog, icon }, index) => (
+            <Card key={index} title={title} tagalog={tagalog}>
               {icon}
             </Card>
           ))}

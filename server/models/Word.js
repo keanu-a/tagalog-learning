@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const Phrase = require('./Phrase.js');
+
 const TenseSchema = new mongoose.Schema(
   {
     present: {
@@ -32,24 +34,10 @@ const StressSchema = new mongoose.Schema(
   { _id: false }
 );
 
-const ExampleSchema = new mongoose.Schema(
-  {
-    tagalog: {
-      type: String,
-      required: [true, 'Example must have tagalog translation'],
-    },
-    english: {
-      type: String,
-      required: [true, 'Example must have english translation'],
-    },
-  },
-  { _id: false }
-);
-
 const WordSchema = new mongoose.Schema({
   root: {
     type: String,
-    required: true,
+    required: [true, 'Word must have a root'],
   },
   tagalog: {
     type: String,
@@ -73,18 +61,25 @@ const WordSchema = new mongoose.Schema({
       'interjection',
       'conjunction',
       'particle',
+      'article',
     ],
   },
   tenses: {
     type: TenseSchema,
     required: this.partOfSpeech === 'verb',
   },
+  // Thinking of adding array of StressSchema 5/9/2023
   stress: {
     type: StressSchema,
     required: [true, 'Word must have letter and place of emphasis'],
   },
-  example: {
-    type: ExampleSchema,
+  // An array of phrases
+  examples: {
+    type: [mongoose.Types.ObjectId],
+    ref: 'Phrase',
+  },
+  note: {
+    type: String,
   },
 });
 

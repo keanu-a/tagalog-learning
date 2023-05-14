@@ -46,13 +46,13 @@ const LessonPage = () => {
   const [completed, setCompleted] = useState(false);
   const [seen, setSeen] = useState(false);
   const [foundLessonTitle, setFoundLessonTitle] = useState(null);
-  const [foundLessonVocab, setFoundLessonVocab] = useState([]);
+  const [foundLessonQuestions, setFoundLessonQuestions] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
 
   const navigate = useNavigate();
   let { lessonTitle } = useParams();
 
-  let vocabAmount;
+  let questionAmount;
 
   // Gets lesson from the database
   useEffect(() => {
@@ -64,16 +64,13 @@ const LessonPage = () => {
       setFoundLessonTitle(foundData.lesson.title);
 
       // This is for adding the stress marks, since not easy to do with phrases
-      foundData.lesson.words.forEach((element, idx) => {
-        element.isWord = true;
+      foundData.lesson.questions.forEach((element, idx) => {
         element.isLearned = false;
       });
 
-      setFoundLessonVocab(
-        foundData.lesson.words.concat(foundData.lesson.phrases)
-      );
+      setFoundLessonQuestions(foundData.lesson.questions);
 
-      vocabAmount = foundData.length;
+      questionAmount = foundLessonQuestions;
     }
 
     fetchLesson();
@@ -86,12 +83,12 @@ const LessonPage = () => {
 
   // After going through all the words, checks if you learned all of them
   // This will be used for drag and drop
-  const checkAllLearned = () => {
-    for (let i = 0; i < vocabAmount; i++) {
-      if (!foundLessonVocab[i].isLearned) return false;
-    }
-    return true;
-  };
+  // const checkAllLearned = () => {
+  //   for (let i = 0; i < vocabAmount; i++) {
+  //     if (!foundLessonVocab[i].isLearned) return false;
+  //   }
+  //   return true;
+  // };
 
   // Next question
   const handleNextQuestion = () => {
@@ -99,7 +96,7 @@ const LessonPage = () => {
     setIsVisible(false);
 
     setTimeout(() => {
-      if (vocabIdx + 1 === foundLessonVocab.length) {
+      if (vocabIdx + 1 === foundLessonQuestions.length) {
         // Sets completed to true if all words are learned
         setSeen(true);
         // setCompleted(checkAllLearned());
@@ -139,15 +136,16 @@ const LessonPage = () => {
           <div className="lesson-in-progress">
             {isVisible && (
               <div className="lesson-question">
+                {/* REMOVING OLD QUESTION FORMAT 5/13 */}
                 <div className="lesson-word-tagalog">
-                  {foundLessonVocab[vocabIdx].isWord ? (
+                  {/* {foundLessonVocab[vocabIdx].isWord ? (
                     <WordWithEmphasis word={foundLessonVocab[vocabIdx]} />
                   ) : (
                     foundLessonVocab[vocabIdx].tagalog
-                  )}
+                  )} */}
                 </div>
                 <div className="lesson-word-english">
-                  {foundLessonVocab[vocabIdx].english}
+                  {/* {foundLessonVocab[vocabIdx].english} */}
                 </div>
               </div>
             )}

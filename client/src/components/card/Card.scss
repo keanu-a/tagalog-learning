@@ -3,9 +3,10 @@
 .card-container {
   background-color: $red-color;
   color: #fff;
-  height: 14rem;
-  width: 12rem;
+  height: 12rem;
+  width: 90%;
   border-radius: 10px;
+  justify-self: center;
 
   position: relative;
   transition: 300ms ease-in-out;
