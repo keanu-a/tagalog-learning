@@ -5,16 +5,52 @@ const Phrase = require('./Phrase.js');
 const TenseSchema = new mongoose.Schema(
   {
     present: {
-      type: String,
-      required: [true, 'Verb must have a present tense'],
+      _id: {
+        type: mongoose.Types.ObjectId,
+        default: function () {
+          return mongoose.Types.ObjectId();
+        },
+      },
+      tagalog: {
+        type: String,
+        required: [true, 'Verb must have a Tagalog present tense'],
+      },
+      english: {
+        type: String,
+        required: [true, 'Verb must have an English present tense'],
+      },
     },
     past: {
-      type: String,
-      required: [true, 'Verb must have a past tense'],
+      _id: {
+        type: mongoose.Types.ObjectId,
+        default: function () {
+          return mongoose.Types.ObjectId();
+        },
+      },
+      tagalog: {
+        type: String,
+        required: [true, 'Verb must have a Tagalog past tense'],
+      },
+      english: {
+        type: String,
+        required: [true, 'Verb must have an English past tense'],
+      },
     },
     future: {
-      type: String,
-      required: [true, 'Verb must have a future tense'],
+      _id: {
+        type: mongoose.Types.ObjectId,
+        default: function () {
+          return mongoose.Types.ObjectId();
+        },
+      },
+      tagalog: {
+        type: String,
+        required: [true, 'Verb must have a Tagalog future tense'],
+      },
+      english: {
+        type: String,
+        required: [true, 'Verb must have an English future tense'],
+      },
     },
   },
   { _id: false }

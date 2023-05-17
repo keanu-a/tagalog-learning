@@ -25,10 +25,7 @@ const LessonSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'Word',
         required: function () {
-          if (
-            this.questionType === 'choose-word' ||
-            this.questionType === 'conjugate'
-          ) {
+          if (this.questionType === 'choose-word') {
             return true;
           }
         },
@@ -40,7 +37,8 @@ const LessonSchema = new mongoose.Schema({
           if (
             this.questionType === 'answer-phrase' ||
             this.questionType === 'translate-phrase' ||
-            this.questionType === 'fill-blank'
+            this.questionType === 'fill-blank' ||
+            this.questionType === 'conjugate'
           ) {
             return true;
           }

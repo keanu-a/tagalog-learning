@@ -5,72 +5,138 @@
   justify-content: space-between;
   background-color: #fff;
   align-items: center;
-  margin: 0 1rem;
+  padding: 0 1rem;
 
-  .logo {
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.5px;
+  position: relative;
+}
 
-    transition: 300ms;
-  }
+.logo {
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
 
-  .logo:hover {
+  transition: 300ms;
+
+  &:hover {
     cursor: pointer;
     color: $red-color;
   }
+}
 
+.page-nav {
+  display: flex;
+}
+
+//////////////////////
+// PAGE NAV BUTTONS //
+
+.page-nav-btn {
+  margin: 0 3rem;
+  position: relative;
+  letter-spacing: 0.5px;
+  background: none;
+  border-style: none;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 400;
+}
+
+.page-nav-btn:hover {
+  cursor: pointer;
+}
+
+.page-nav-btn:after {
+  content: '';
+  position: absolute;
+  background-color: $red-color;
+  height: 3px;
+  width: 0;
+  left: 0;
+  bottom: -4px;
+  transition: 400ms;
+}
+
+.page-nav-btn:hover:after {
+  width: 100%;
+}
+
+// END PAGE NAV BUTTONS //
+//////////////////////////
+
+.user-control {
+  display: flex;
+  color: white;
+  width: 5rem;
+  height: 2rem;
+
+  border-radius: 5px;
+
+  align-items: center;
+  justify-content: center;
+  background-color: $red-color;
+
+  transition: 300ms;
+}
+
+.user-control:hover {
+  cursor: pointer;
+  background-color: #a31021;
+}
+
+.nav-menu-btn {
+  display: none;
+}
+
+.nav-menu {
+  position: absolute;
+
+  border-radius: 10px;
+
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+
+  right: 0;
+  bottom: -230%;
+}
+
+.hide {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
   .page-nav {
-    display: flex;
-
-    button {
-      margin: 0 3rem;
-      position: relative;
-      letter-spacing: 0.5px;
-      background: none;
-      border-style: none;
-      font-size: 1rem;
-      font-family: inherit;
-      font-weight: 400;
-    }
-
-    button:hover {
-      cursor: pointer;
-    }
-
-    button:after {
-      content: '';
-      position: absolute;
-      background-color: $red-color;
-      height: 3px;
-      width: 0;
-      left: 0;
-      bottom: -4px;
-      transition: 400ms;
-    }
-
-    button:hover:after {
-      width: 100%;
-    }
+    display: none;
   }
 
-  .user-control {
+  .nav-menu-btn {
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 2rem;
     display: flex;
-    color: white;
-    width: 5rem;
-    height: 2rem;
-
-    border-radius: 5px;
-
     align-items: center;
     justify-content: center;
-    background-color: $red-color;
+    color: $red-color;
 
     transition: 300ms;
-  }
 
-  .user-control:hover {
-    cursor: pointer;
-    background-color: #a31021;
+    &:hover {
+      color: $blue-color;
+    }
   }
 }

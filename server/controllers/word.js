@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Word = require('../models/Word.js');
 
 module.exports.getWord = async (req, res) => {
@@ -9,4 +10,33 @@ module.exports.getWord = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+module.exports.updateWord = async (word) => {
+  const presentId = new mongoose.Types.ObjectId();
+  const pastId = new mongoose.Types.ObjectId();
+  const futureId = new mongoose.Types.ObjectId();
+
+  await Word.findOneAndUpdate(
+    { tagalog: word },
+    {
+      tenses: {
+        present: {
+          _id: presentId,
+          tagalog: 'natutulog',
+          english: 'sleeping',
+        },
+        past: {
+          _id: pastId,
+          tagalog: 'natulog',
+          english: 'slept',
+        },
+        future: {
+          _id: futureId,
+          tagalog: 'matutulog',
+          english: 'will sleep',
+        },
+      },
+    }
+  );
 };

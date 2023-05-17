@@ -3,13 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import './Navbar.scss';
 
 import logoUrl from '../../assets/logo.png';
+import IcBaselineMenu from '../../assets/icons/IcBaselineMenu';
 
 const Navbar = () => {
+  const [toggleMenu, setToggleMenu] = useState(false);
   const navigate = useNavigate();
 
   // Create a function when clicked, navigate to correct URL. Keep underline
   const handleOnClick = (url) => {
     navigate(url);
+  };
+
+  const handleToggleMenu = () => {
+    setToggleMenu((prev) => !prev);
   };
 
   return (
@@ -20,14 +26,44 @@ const Navbar = () => {
       </div>
 
       <div className="page-nav">
-        <button onClick={() => handleOnClick('/start-learning')}>
+        <button
+          className="page-nav-btn"
+          onClick={() => handleOnClick('/start-learning')}
+        >
           Start Learning
         </button>
-        <button onClick={() => handleOnClick('/conjugate')}>Conjugate</button>
+        <button
+          className="page-nav-btn"
+          onClick={() => handleOnClick('/conjugate')}
+        >
+          Conjugate
+        </button>
+        <div className="user-control">
+          <div>Sign In</div>
+        </div>
       </div>
 
-      <div className="user-control">
-        <div>Sign In</div>
+      <button className="nav-menu-btn" onClick={() => handleToggleMenu()}>
+        <IcBaselineMenu />
+      </button>
+
+      <div className={`nav-menu ${toggleMenu === true ? '' : 'hide'}`}>
+        <button
+          className="page-nav-btn"
+          onClick={() => handleOnClick('/start-learning')}
+        >
+          Start Learning
+        </button>
+        <button
+          className="page-nav-btn"
+          onClick={() => handleOnClick('/conjugate')}
+        >
+          Conjugate
+        </button>
+
+        <div className="user-control">
+          <div>Sign In</div>
+        </div>
       </div>
     </div>
   );

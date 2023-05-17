@@ -4,6 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import Loading from '../../components/loading/Loading';
 
+import './SectionPage.scss';
+
 const SectionPage = () => {
   const [sectionData, setSectionData] = useState(null);
   const { sectionTitle } = useParams();
@@ -29,17 +31,17 @@ const SectionPage = () => {
     <div className="section-container">
       <Navbar />
 
-      {console.log(sectionData)}
+      <div className="section-header">{sectionData.title}</div>
 
-      <h1>{sectionData.title}</h1>
-
-      {sectionData.lessons.map(({ title }, idx) => {
-        return (
-          <div key={idx} onClick={() => navigate(`${title}`)}>
-            {title}
-          </div>
-        );
-      })}
+      <div className="section-lessons">
+        {sectionData.lessons.map(({ title }, idx) => {
+          return (
+            <div key={idx} onClick={() => navigate(`${title}`)}>
+              {title}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

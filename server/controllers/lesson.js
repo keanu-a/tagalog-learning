@@ -9,8 +9,16 @@ module.exports.getLesson = async (req, res) => {
         select: 'tagalog english',
       })
       .populate({
+        path: 'questions.phrase',
+        select: 'tagalog english words',
+      })
+      .populate({
         path: 'questions.options',
-        select: 'tagalog english',
+        select: 'tagalog english partOfSpeech',
+        populate: {
+          path: 'tenses',
+          select: 'present past future',
+        },
       });
     // .populate('questions.options')
 

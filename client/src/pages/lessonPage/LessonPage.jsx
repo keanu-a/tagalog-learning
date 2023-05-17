@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-// import { getLesson } from '../../data/api';
 import logoUrl from '../../assets/logo.png';
 import './LessonPage.scss';
 
 import Loading from '../../components/loading/Loading';
+import ChooseWord from './chooseWord/ChooseWord';
+import FillBlank from './fillBlank/FillBlank';
+import Conjugate from './conjugate/Conjugate';
+import LessonButton from './lessonButton/LessonButton';
 
 // This component adds yellow to emphasis letter in words
-const WordWithEmphasis = (props) => {
-  const stress = props.word.stress;
-  const letters = props.word.tagalog.split('');
+const WordWithEmphasis = ({ word }) => {
+  const stress = word.stress;
+  const letters = word.tagalog.split('');
 
   // Each word in the DB has which letter to stress and the n-th number of that letter
   const stressLetter = stress.letter;
@@ -42,19 +45,19 @@ const WordWithEmphasis = (props) => {
 };
 
 const LessonPage = () => {
-  const [vocabIdx, setVocabIdx] = useState(0);
   const [completed, setCompleted] = useState(false);
-  const [seen, setSeen] = useState(false);
+
+  const [questionIdx, setQuestionIdx] = useState(0);
   const [foundLessonTitle, setFoundLessonTitle] = useState(null);
   const [foundLessonQuestions, setFoundLessonQuestions] = useState([]);
-  const [isVisible, setIsVisible] = useState(true);
+
+  const [clickedIdx, setClickedIdx] = useState(null);
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
 
   const navigate = useNavigate();
   let { lessonTitle } = useParams();
 
-  let questionAmount;
-
-  // Gets lesson from the database
+  // Fetches all data from MongoDB only once when page loads
   useEffect(() => {
     async function fetchLesson() {
       const response = await fetch(
@@ -69,44 +72,221 @@ const LessonPage = () => {
       });
 
       setFoundLessonQuestions(foundData.lesson.questions);
-
-      questionAmount = foundLessonQuestions;
     }
 
     fetchLesson();
   }, []);
 
-  // Loading for if data isn't fetched yet
+  // Renders loading screen while fetching data
   if (!foundLessonTitle) {
     return <Loading />;
   }
 
-  // After going through all the words, checks if you learned all of them
-  // This will be used for drag and drop
-  // const checkAllLearned = () => {
-  //   for (let i = 0; i < vocabAmount; i++) {
-  //     if (!foundLessonVocab[i].isLearned) return false;
-  //   }
-  //   return true;
-  // };
+  // Checks if the answer clicked matches the answer of the question
+  const verifyAnswer = (question) => {
+    if (question.questionType === 'conjugate') {
+      // This works because words are stored in order in a phrase document in the DB
+      const phrase = question.phrase;
+      if (
+        clickedIdx[0]._id !== phrase.words[0] ||
+        clickedIdx[1]._id !== phrase.words[1]
+      )
+        setIsAnswerCorrect(false);
+      else setIsAnswerCorrect(true);
 
-  // Next question
-  const handleNextQuestion = () => {
-    // If went through all words
-    setIsVisible(false);
+      // This is for questions that are NOT type conjugate
+    } else {
+      clickedIdx === question.answer
+        ? setIsAnswerCorrect(true)
+        : setIsAnswerCorrect(false);
+    }
+  };
 
-    setTimeout(() => {
-      if (vocabIdx + 1 === foundLessonQuestions.length) {
-        // Sets completed to true if all words are learned
-        setSeen(true);
-        // setCompleted(checkAllLearned());
-        setCompleted(true);
+  // Handles options clicked when checking more than 1 option
+  const handleMultipleOptions = (wordObject) => {
+    let openIndices = [...clickedIdx];
+    let changedClickedIdx = false;
+
+    // If both indices are null, fill the first one
+    if (clickedIdx[0] === null && clickedIdx[1] === null) {
+      openIndices[0] = { _id: wordObject._id, tagalog: wordObject.tagalog };
+      changedClickedIdx = true;
+    }
+
+    // If first index is null, and second index is NOT null,
+    // - If second index was clicked already, toggle
+    // - If it wasn't, change first index, mark full answer
+    if (
+      clickedIdx[0] === null &&
+      clickedIdx[1] !== null &&
+      !changedClickedIdx
+    ) {
+      // Toggle
+      if (clickedIdx[1]._id === wordObject._id) {
+        openIndices[1] = null;
       } else {
-        setVocabIdx(vocabIdx + 1);
+        openIndices[0] = { _id: wordObject._id, tagalog: wordObject.tagalog };
+        openIndices[2] = true;
+      }
+      changedClickedIdx = true;
+    }
+
+    // If first index is NOT null, and second index is null
+    // - If first index was clicked already, toggle
+    // - If it wasn't, change second index, mark full answer
+    if (
+      clickedIdx[0] !== null &&
+      clickedIdx[1] === null &&
+      !changedClickedIdx
+    ) {
+      // Toggle
+      if (clickedIdx[0]._id === wordObject._id) {
+        openIndices[0] = null;
+      } else {
+        openIndices[1] = { _id: wordObject._id, tagalog: wordObject.tagalog };
+        openIndices[2] = true;
+      }
+      changedClickedIdx = true;
+    }
+
+    // If both indices are NOT null
+    // - Check if either index is the matching _id to toggle
+    //   - Then set index 2 to false
+    if (
+      clickedIdx[0] !== null &&
+      clickedIdx[1] !== null &&
+      !changedClickedIdx
+    ) {
+      // Toggle first index
+      if (clickedIdx[0]._id === wordObject._id) {
+        openIndices[0] = null;
+        openIndices[2] = false;
       }
 
-      setIsVisible(true);
-    }, 300);
+      // Toggle second index
+      if (clickedIdx[1]._id === wordObject._id) {
+        openIndices[1] = null;
+        openIndices[2] = false;
+      }
+    }
+
+    setClickedIdx(openIndices);
+  };
+
+  // If option was clicked return true
+  // - Else return false
+  const wasOptionClicked = (id) => {
+    return clickedIdx.some((obj) => {
+      if (obj !== null) return obj._id === id;
+    });
+  };
+
+  // Handles changing to the next question
+  const handleNextQuestion = () => {
+    if (questionIdx + 1 === foundLessonQuestions.length) {
+      setCompleted(true);
+    } else {
+      setQuestionIdx((prev) => (prev += 1));
+      setIsAnswerCorrect(null);
+      setClickedIdx(null);
+    }
+  };
+
+  // This function forms the prompt
+  const formQuestion = (question) => {
+    switch (question.questionType) {
+      case 'choose-word':
+        return <ChooseWord question={question} clickedIdx={clickedIdx} />;
+
+      case 'fill-blank':
+        return <FillBlank question={question} clickedIdx={clickedIdx} />;
+
+      case 'conjugate':
+        return <Conjugate question={question} clickedIdx={clickedIdx} />;
+    }
+  };
+
+  // This function forms the options of the question
+  const formOptions = (question) => {
+    let questionOptions = question.options;
+
+    // Adds the conjugations to the options if question type is 'conjugate'
+    if (question.questionType === 'conjugate') {
+      // If clickedIdx is only null, change to an array of options
+      // Index 2 is a boolean to show if available indices 0 and 1 are full
+      if (clickedIdx === null) setClickedIdx([null, null, false]);
+      let verb = question.options[0];
+
+      // Combining the given options with the tenses of the verb fetched
+      const tenses = [
+        verb.tenses.present,
+        verb.tenses.past,
+        verb.tenses.future,
+      ];
+      questionOptions = [...tenses, ...question.options];
+
+      // To understand the button
+      // The button is disabled only if clickedIdx indices are full
+      // If it was clicked, it will be yellow, remain red if it wasnt
+      // Correct answers will be turned green once the check button is clicked
+      // - Disable all incorrect answers
+      return (
+        <div className="options">
+          {questionOptions.map((word, idx) => (
+            <button
+              disabled={
+                clickedIdx !== null &&
+                clickedIdx[0] !== null &&
+                clickedIdx[1] !== null &&
+                !wasOptionClicked(word._id)
+              }
+              className={`${
+                clickedIdx !== null && wasOptionClicked(word._id)
+                  ? 'clicked'
+                  : 'not-clicked'
+              } ${
+                clickedIdx !== null &&
+                clickedIdx[0] !== null &&
+                clickedIdx[1] !== null &&
+                isAnswerCorrect !== null
+                  ? question.phrase.words.some((id) => id === word._id)
+                    ? 'correct-color'
+                    : 'disabled'
+                  : ''
+              }`}
+              key={idx}
+              onClick={() => {
+                handleMultipleOptions(word);
+              }}
+            >
+              {word.tagalog}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    // All other question types
+    return (
+      <div className="options">
+        {questionOptions.map(({ tagalog }, idx) => (
+          <button
+            disabled={isAnswerCorrect === null ? false : true}
+            key={idx}
+            onClick={() => setClickedIdx(idx)}
+            className={`${clickedIdx === idx ? 'clicked' : 'not-clicked'} ${
+              isAnswerCorrect !== null
+                ? idx === question.answer
+                  ? 'correct-color'
+                  : 'disabled'
+                : ''
+            }`}
+          >
+            {tagalog}
+          </button>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -121,43 +301,39 @@ const LessonPage = () => {
         <div>TagalogLearning.com</div>
       </div>
 
-      <div className="lesson-container">
-        <div className="lesson-title">{foundLessonTitle}</div>
+      {!completed && (
+        <div className="lesson-container">
+          <div className="lesson-left">
+            <div className="lesson-title">{lessonTitle}</div>
 
-        {completed === true ? (
-          <div className="lesson-completed">
-            <div>You Finished!</div>
-            <p>Tapos ka na!</p>
-            <button className="lesson-btn" onClick={() => navigate('/')}>
-              Back to Home
+            {formQuestion(foundLessonQuestions[questionIdx])}
+
+            <LessonButton
+              isAnswerCorrect={isAnswerCorrect}
+              clickedIdx={clickedIdx}
+              verifyAnswer={verifyAnswer}
+              question={foundLessonQuestions[questionIdx]}
+              handleNextQuestion={handleNextQuestion}
+            />
+          </div>
+          <div className="lesson-right">
+            {formOptions(foundLessonQuestions[questionIdx])}
+          </div>
+        </div>
+      )}
+
+      {completed && (
+        <div className="lesson-container end">
+          <div className="lesson-end">You Finished!</div>
+
+          <div className="lesson-end-btns">
+            <button onClick={() => navigate('/')}>Home</button>
+            <button onClick={() => navigate('/start-learning')}>
+              Learn More
             </button>
           </div>
-        ) : (
-          <div className="lesson-in-progress">
-            {isVisible && (
-              <div className="lesson-question">
-                {/* REMOVING OLD QUESTION FORMAT 5/13 */}
-                <div className="lesson-word-tagalog">
-                  {/* {foundLessonVocab[vocabIdx].isWord ? (
-                    <WordWithEmphasis word={foundLessonVocab[vocabIdx]} />
-                  ) : (
-                    foundLessonVocab[vocabIdx].tagalog
-                  )} */}
-                </div>
-                <div className="lesson-word-english">
-                  {/* {foundLessonVocab[vocabIdx].english} */}
-                </div>
-              </div>
-            )}
-
-            <div className="lesson-btn-container">
-              <button className="lesson-btn" onClick={handleNextQuestion}>
-                Next
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

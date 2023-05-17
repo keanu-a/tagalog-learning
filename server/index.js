@@ -24,6 +24,8 @@ const { lessonOnePhraseData } = require('./data/phrases.js');
 const { lessonOneLessonData } = require('./data/lessons.js');
 const { sectionBeginnerData } = require('./data/sections.js');
 
+const { updateWord } = require('./controllers/word.js');
+
 //* CONFIGURATIONS *//
 dotenv.config();
 const app = express();
@@ -67,6 +69,7 @@ mongoose
     // Section.insertMany(sectionBeginnerData).then(() =>
     //   console.log('Sections were added to the database!')
     // );
+    // updateWord('matulog').then(() => console.log('Word updated'));
 
     // Word.insertMany(dataWord).then(() =>
     //   console.log('Words were added to the database!')
