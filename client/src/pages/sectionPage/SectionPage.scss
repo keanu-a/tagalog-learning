@@ -9,6 +9,8 @@
   width: 80%;
   margin: auto;
 
+  gap: 1rem;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +33,7 @@
       cursor: pointer;
       background-color: $yellow-color;
       color: $blue-color;
-      transform: translateY(-0.8rem);
+      transform: translateY(-0.6rem);
       box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
     }
   }

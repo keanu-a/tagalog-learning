@@ -10,7 +10,7 @@ tagalog.
 
 This is a full-stack application.
 Uses React.js for the frontend.
-Uses Express, Node, and MongoDB for the backend
+Uses Express, Node, and MongoDB for the backend.
 
 My Mongo database holds information about:
 
