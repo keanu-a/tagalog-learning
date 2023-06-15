@@ -6,10 +6,11 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 
-const wordRoutes = require('./routes/word.js');
-const phraseRoutes = require('./routes/phrase.js');
-const lessonRoutes = require('./routes/lesson.js');
-const sectionRoutes = require('./routes/section.js');
+const wordRoutes = require('./routes/wordRoutes.js');
+const phraseRoutes = require('./routes/phraseRoutes.js');
+const lessonRoutes = require('./routes/lessonRoutes.js');
+const sectionRoutes = require('./routes/sectionRoutes.js');
+const userRoutes = require('./routes/userRoutes.js');
 
 //* FOR IMPORTING DATA *//
 const Word = require('./models/Word.js');
@@ -24,7 +25,7 @@ const { lessonOnePhraseData } = require('./data/phrases.js');
 const { lessonOneLessonData } = require('./data/lessons.js');
 const { sectionBeginnerData } = require('./data/sections.js');
 
-const { updateWord } = require('./controllers/word.js');
+const { updateWord } = require('./controllers/wordController.js');
 
 //* CONFIGURATIONS *//
 dotenv.config();
@@ -36,12 +37,14 @@ app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
+app.use(express.json({ limit: '10kb' }));
 
 //* ROUTES *//
 app.use('/api/v1/word', wordRoutes);
 app.use('/api/v1/phrase', phraseRoutes);
 app.use('/api/v1/lesson', lessonRoutes);
 app.use('/api/v1/section', sectionRoutes);
+app.use('/api/v1/user', userRoutes);
 
 //* MONGOOSE AND SERVER SETUP *//
 const port = process.env.PORT || 9000;

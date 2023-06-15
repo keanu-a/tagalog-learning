@@ -1,5 +1,5 @@
 const express = require('express');
-const { getPhrase } = require('../controllers/phrase.js');
+const { getPhrase } = require('../controllers/phraseController.js');
 
 const router = express.Router();
 

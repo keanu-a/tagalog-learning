@@ -13,7 +13,7 @@ const ChooseWord = ({ question, clickedIdx }) => {
           clickedIdx ? 'fit-content' : 'placeholder'
         }`}
       >
-        {clickedIdx === null ? '' : question.options[clickedIdx].tagalog}
+        {clickedIdx === null ? '?' : question.options[clickedIdx].tagalog}
       </div>
     </div>
   );
