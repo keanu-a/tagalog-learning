@@ -1,3 +1,4 @@
+const { promisify } = require('util');
 const User = require('../models/User.js');
 const jwt = require('jsonwebtoken');
 const sendEmail = require('../util/email.js');
@@ -67,6 +68,50 @@ module.exports.login = async (req, res, next) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+// Function for routes accessed by logged in users only
+module.exports.protect = async (req, res, next) => {
+  let token;
+
+  // Get token and check if its there
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+
+  if (!token) {
+    return res.status(401).json({
+      status: 'Fail',
+      message: 'You are not logged in. Please log in to get access.',
+    });
+  }
+
+  // Verification token
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+  // Check if user exists
+  const foundUser = await User.findById(decoded.id);
+  if (!foundUser) {
+    return res.status(401).json({
+      status: 'Fail',
+      message: 'The user belonging to this token does no longer exist,',
+    });
+  }
+
+  // Check if user changed password after token was issued
+  if (foundUser.changedPasswordAfter(decoded.iat)) {
+    return res.status(401).json({
+      status: 'Fail',
+      message: 'User recently changed password! Please log in again',
+    });
+  }
+
+  // Grant access to protected route
+  req.user = foundUser;
+  next();
 };
 
 // Function for when a user forgets their password

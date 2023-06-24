@@ -6,6 +6,7 @@ const {
   resetPassword,
   forgotPassword,
   updatePassword,
+  protect,
 } = require('../controllers/authController.js');
 const { getAllUsers } = require('../controllers/userController.js');
 
@@ -18,7 +19,9 @@ router.post('/login', login);
 router.post('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:token', resetPassword);
 
-// This should be a protected route
+router.use(protect);
+
+// This should be a protected route for logged in users
 router.patch('/updateMyPassword', updatePassword);
 
 module.exports = router;
