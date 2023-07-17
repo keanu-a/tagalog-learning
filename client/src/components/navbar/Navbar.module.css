@@ -1,0 +1,40 @@
+.header {
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+  max-width: 1200px;
+  justify-content: space-between;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  justify-content: space-around;
+  text-transform: uppercase;
+}
+
+.nav ul a {
+  transition: 200ms;
+}
+
+.nav ul a:link,
+.nav ul a:visited {
+  text-decoration: none;
+  color: var(--color-dark--0);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.nav ul a:hover {
+  color: var(--color-brand--1);
+}
+
+.nav ul a:global(.active) {
+  color: var(--color-brand--1);
+}

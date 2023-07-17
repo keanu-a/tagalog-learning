@@ -1,31 +1,32 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Home from './pages/homePage/Home';
-import StartLearning from './pages/startLearningPage/StartLearning';
+import LearnPage from './pages/learnPage/LearnPage';
 import Conjugate from './pages/conjugatePage/Conjugate';
 import LessonPage from './pages/lessonPage/LessonPage';
 import SectionPage from './pages/sectionPage/SectionPage';
+import LoginPage from './pages/loginPage/LoginPage';
 
 function App() {
-  const location = useLocation();
-
   return (
-    <div className="App">
-      <Routes location={location} key={location.pathname}>
+    <BrowserRouter>
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/lesson">
           <Route path=":lessonTitle" element={<LessonPage />} />
         </Route>
 
-        <Route path="/start-learning" element={<StartLearning />} />
-        <Route path="/start-learning/sections">
+        <Route path="/learn" element={<LearnPage />} />
+        <Route path="/learn/sections">
           <Route path=":sectionTitle" element={<SectionPage />} />
           <Route path=":sectionTitle/:lessonTitle" element={<LessonPage />} />
         </Route>
 
+        <Route path="/login" element={<LoginPage />} />
+
         <Route path="/conjugate" element={<Conjugate />} />
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 

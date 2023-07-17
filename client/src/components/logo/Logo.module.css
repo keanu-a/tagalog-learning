@@ -1,0 +1,24 @@
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: 400;
+}
+
+.lessonLogo {
+  font-size: 3vh;
+}
+
+.logo:hover div {
+  transition: 300ms;
+  cursor: pointer;
+  color: var(--color-brand--1);
+}
+
+.logo:link,
+.logo:visited {
+  text-decoration: none;
+  color: var(--color-dark--0);
+  letter-spacing: 0.5px;
+}

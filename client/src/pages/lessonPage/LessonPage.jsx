@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useReducer } from 'react';
+import { useParams } from 'react-router-dom';
 
 import logoUrl from '../../assets/logo.png';
+import styles from './LessonPage.module.css';
 import './LessonPage.scss';
+
+import Logo from '../../components/logo/Logo';
 
 import Loading from '../../components/loading/Loading';
 import ChooseWord from './chooseWord/ChooseWord';
 import FillBlank from './fillBlank/FillBlank';
 import Conjugate from './conjugate/Conjugate';
 import LessonButton from './lessonButton/LessonButton';
+import LessonStart from '../../components/lessonStart/LessonStart';
 
 // This component adds yellow to emphasis letter in words
 const WordWithEmphasis = ({ word }) => {
@@ -44,43 +48,66 @@ const WordWithEmphasis = ({ word }) => {
   );
 };
 
+const initialState = {
+  questions: [],
+
+  // 'loading', 'error', 'ready', 'active', 'finished'
+  status: 'loading',
+  questionIdx: 0,
+  clickedOption: null,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'dataReceived':
+      return {
+        ...state,
+        questions: action.payload.questions,
+        status: 'ready',
+      };
+
+    case 'dataFailed':
+      return { ...state, status: 'error' };
+
+    case 'start':
+      return { ...state, status: 'active' };
+
+    case 'clicked':
+      // action.payload should be the idx of the option
+      return { ...state, clickedOption: action.payload };
+
+    case 'next':
+      return { ...state, questionIdx: questionIdx + 1, clickedOption: null };
+
+    case 'finish':
+      return { ...state, status: 'finished' };
+
+    default:
+      throw new Error('Unknown action type');
+  }
+};
+
 const LessonPage = () => {
+  const [{ questions, status, questionIdx, clickedOption }, dispatch] =
+    useReducer(reducer, initialState);
+  const amountOfQuestions = questions.length;
+
   const [completed, setCompleted] = useState(false);
 
-  const [questionIdx, setQuestionIdx] = useState(0);
-  const [foundLessonTitle, setFoundLessonTitle] = useState(null);
   const [foundLessonQuestions, setFoundLessonQuestions] = useState([]);
 
   const [clickedIdx, setClickedIdx] = useState(null);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
 
-  const navigate = useNavigate();
   let { lessonTitle } = useParams();
 
-  // Fetches all data from MongoDB only once when page loads
+  // Fetches lesson data from MongoDB only once on mount
   useEffect(() => {
-    async function fetchLesson() {
-      const response = await fetch(
-        `http://localhost:5000/api/v1/lesson/${lessonTitle}`
-      );
-      const foundData = await response.json();
-      setFoundLessonTitle(foundData.lesson.title);
-
-      // This is for adding the stress marks, since not easy to do with phrases
-      foundData.lesson.questions.forEach((element, idx) => {
-        element.isLearned = false;
-      });
-
-      setFoundLessonQuestions(foundData.lesson.questions);
-    }
-
-    fetchLesson();
+    fetch(`http://localhost:5000/api/v1/lesson/${lessonTitle}`)
+      .then((res) => res.json())
+      .then((data) => dispatch({ type: 'dataReceived', payload: data.lesson }))
+      .catch((err) => dispatch({ type: 'dataFailed' }));
   }, []);
-
-  // Renders loading screen while fetching data
-  if (!foundLessonTitle) {
-    return <Loading />;
-  }
 
   // Checks if the answer clicked matches the answer of the question
   const verifyAnswer = (question) => {
@@ -192,20 +219,6 @@ const LessonPage = () => {
     }
   };
 
-  // This function forms the prompt
-  const formQuestion = (question) => {
-    switch (question.questionType) {
-      case 'choose-word':
-        return <ChooseWord question={question} clickedIdx={clickedIdx} />;
-
-      case 'fill-blank':
-        return <FillBlank question={question} clickedIdx={clickedIdx} />;
-
-      case 'conjugate':
-        return <Conjugate question={question} clickedIdx={clickedIdx} />;
-    }
-  };
-
   // This function forms the options of the question
   const formOptions = (question) => {
     let questionOptions = question.options;
@@ -290,50 +303,39 @@ const LessonPage = () => {
   };
 
   return (
-    <div className="lesson-page">
-      <div className="lesson-logo" onClick={() => navigate('/')}>
-        <img
-          alt="Tagalog Learning Logo"
-          height="100"
-          width="100"
-          src={logoUrl}
-        />
-        <div>TagalogLearning.com</div>
-      </div>
+    <div className={styles.lessonPage}>
+      {status === 'loading' && <Loading />}
+      {status === 'error' && <p>Error</p>}
 
-      {!completed && (
-        <div className="lesson-container">
-          <div className="lesson-left">
-            <div className="lesson-title">{lessonTitle}</div>
+      {/* ONLY SHOW LOGO IF NOT ERROR OR LOADING */}
+      {status !== 'loading' && status !== 'error' && <Logo lesson={true} />}
 
-            {formQuestion(foundLessonQuestions[questionIdx])}
+      {status === 'ready' && (
+        <LessonStart title={lessonTitle} dispatch={dispatch} />
+      )}
 
-            <LessonButton
-              isAnswerCorrect={isAnswerCorrect}
-              clickedIdx={clickedIdx}
-              verifyAnswer={verifyAnswer}
-              question={foundLessonQuestions[questionIdx]}
-              handleNextQuestion={handleNextQuestion}
-            />
-          </div>
-          <div className="lesson-right">
-            {formOptions(foundLessonQuestions[questionIdx])}
-          </div>
+      {/* ONLY SHOW PROGRES BAR IF ACTIVE OR FINISHED */}
+      {(status === 'active' || status === 'finished') && (
+        <div>
+          <progress
+            className={styles.progress}
+            max={amountOfQuestions}
+            value={questionIdx + 1}
+          />
+          <h3>Lesson: {lessonTitle}</h3>
         </div>
       )}
 
-      {completed && (
-        <div className="lesson-container end">
-          <div className="lesson-end">You Finished!</div>
+      {status === 'active' &&
+        questions[questionIdx].questionType === 'choose-word' && (
+          <ChooseWord question={questions[questionIdx]} />
+        )}
+      {status === 'active' &&
+        questions[questionIdx].questionType === 'fill-blank' && <FillBlank />}
+      {status === 'active' &&
+        questions[questionIdx].questionType === 'conjugate' && <Conjugate />}
 
-          <div className="lesson-end-btns">
-            <button onClick={() => navigate('/')}>Home</button>
-            <button onClick={() => navigate('/start-learning')}>
-              Learn More
-            </button>
-          </div>
-        </div>
-      )}
+      {status === 'finished' && <div>Finished</div>}
     </div>
   );
 };

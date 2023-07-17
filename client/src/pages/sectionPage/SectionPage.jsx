@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import Navbar from '../../components/navbar/Navbar';
 import Loading from '../../components/loading/Loading';
+import PageHeader from '../../components/pageHeader/PageHeader';
 
 import './SectionPage.scss';
 
@@ -11,6 +11,11 @@ const SectionPage = () => {
   const { sectionTitle } = useParams();
 
   const navigate = useNavigate();
+
+  // Capitalize a string
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
   useEffect(() => {
     async function fetchSection() {
@@ -28,19 +33,19 @@ const SectionPage = () => {
   if (!sectionData) return <Loading />;
 
   return (
-    <div className="section-container">
-      <Navbar />
+    <div className="page-container">
+      <div className="page-content">
+        <PageHeader text={capitalize(sectionData.title)} />
 
-      <div className="section-header">{sectionData.title}</div>
-
-      <div className="section-lessons">
-        {sectionData.lessons.map(({ title }, idx) => {
-          return (
-            <div key={idx} onClick={() => navigate(`${title}`)}>
-              {title}
-            </div>
-          );
-        })}
+        <div className="section-lessons">
+          {sectionData.lessons.map(({ title }, idx) => {
+            return (
+              <div key={idx} onClick={() => navigate(`${title}`)}>
+                {capitalize(title)}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

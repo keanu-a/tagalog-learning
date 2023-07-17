@@ -7,7 +7,7 @@ module.exports.getUser = async (req, res) => {
 
     res.status(200).json({ status: 'success', user: foundUser });
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ status: 'fail', message: error.message });
   }
 };
 
@@ -17,6 +17,6 @@ module.exports.getAllUsers = async (req, res) => {
 
     res.status(200).json({ status: 'success', users });
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ status: 'fail', message: error.message });
   }
 };

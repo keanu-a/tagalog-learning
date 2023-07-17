@@ -24,6 +24,6 @@ module.exports.getLesson = async (req, res) => {
 
     res.status(200).json({ status: 'success', lesson: foundLesson });
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ status: 'fail', message: error.message });
   }
 };

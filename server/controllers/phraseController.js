@@ -8,6 +8,6 @@ module.exports.getPhrase = async (req, res) => {
 
     res.status(200).json({ status: 'success', phrase: foundPhrase });
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ status: 'fail', message: error.message });
   }
 };
