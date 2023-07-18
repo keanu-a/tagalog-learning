@@ -11,7 +11,7 @@ import FillBlank from './fillBlank/FillBlank';
 import Conjugate from './conjugate/Conjugate';
 
 import LessonStart from '../../components/lessonComponents/lessonStart/LessonStart';
-import NextButton from '../../components/lessonComponents/nextButton/NextButton';
+import LessonButton from '../../components/lessonComponents/lessonButton/LessonButton';
 import Options from '../../components/lessonComponents/options/Options';
 
 const initialState = {
@@ -21,7 +21,9 @@ const initialState = {
   status: 'loading',
   questionIdx: 0,
   selectedOption: null,
+  correctAnswer: null,
   checkedAnswer: false,
+  answeredCorrectly: null,
 };
 
 const reducer = (state, action) => {
@@ -36,8 +38,13 @@ const reducer = (state, action) => {
     case 'dataFailed':
       return { ...state, status: 'error' };
 
+    // This sets status to active and sets first correct answer
     case 'start':
-      return { ...state, status: 'active' };
+      return {
+        ...state,
+        status: 'active',
+        correctAnswer: state.questions[state.questionIdx].answer,
+      };
 
     // This case is for when a user clicks an option
     case 'clicked':
@@ -46,15 +53,25 @@ const reducer = (state, action) => {
 
     // This case is for when a user clicks the check button
     case 'check':
-      return { ...state, checkedAnswer: true };
+      let correct;
+
+      // This handles checking if the answer is correct
+      if (state.selectedOption == state.correctAnswer) correct = true;
+      else correct = false;
+
+      return { ...state, checkedAnswer: true, answeredCorrectly: correct };
 
     // This case is for when a user clicks the next button
     case 'next':
+      const nextIdx = state.questionIdx + 1;
+
       return {
         ...state,
-        questionIdx: state.questionIdx + 1,
+        questionIdx: nextIdx,
+        correctAnswer: state.questions[nextIdx].answer,
         selectedOption: null,
         checkedAnswer: false,
+        answeredCorrectly: null,
       };
 
     case 'finish':
@@ -67,7 +84,15 @@ const reducer = (state, action) => {
 
 const LessonPage = () => {
   const [
-    { questions, status, questionIdx, selectedOption, checkedAnswer },
+    {
+      questions,
+      status,
+      questionIdx,
+      selectedOption,
+      correctAnswer,
+      checkedAnswer,
+      answeredCorrectly,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
   const amountOfQuestions = questions.length;
@@ -121,14 +146,22 @@ const LessonPage = () => {
           )}
           {questions[questionIdx].questionType === 'conjugate' && <Conjugate />}
 
-          <Options question={questions[questionIdx]} dispatch={dispatch} />
+          <Options
+            question={questions[questionIdx]}
+            dispatch={dispatch}
+            checkedAnswer={checkedAnswer}
+            answeredCorrectly={answeredCorrectly}
+            correctAnswer={correctAnswer}
+            selectedOption={selectedOption}
+          />
 
-          <NextButton
+          <LessonButton
             dispatch={dispatch}
             questionIdx={questionIdx}
             amountOfQuestions={amountOfQuestions}
             selectedOption={selectedOption}
             checkedAnswer={checkedAnswer}
+            answeredCorrectly={answeredCorrectly}
           />
         </div>
       )}

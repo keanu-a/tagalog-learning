@@ -96,3 +96,22 @@ button:hover {
   background-color: var(--color-brand--3);
   color: var(--color-brand--2);
 }
+
+/* This class is for disabling buttons */
+.disabled {
+  opacity: 40%;
+  pointer-events: none;
+  cursor: none;
+}
+
+/* This class is for showing correct answer */
+.correct {
+  background-color: var(--color-correct--0);
+  color: #fff;
+}
+
+/* This class is for showing incorrect answer */
+.incorrect {
+  background-color: var(--color-brand--1);
+  color: #fff;
+}

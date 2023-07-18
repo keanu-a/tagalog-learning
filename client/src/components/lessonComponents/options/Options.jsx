@@ -1,20 +1,38 @@
 import styles from './Options.module.css';
 
-function Options({ question, dispatch }) {
+function Options({
+  question,
+  dispatch,
+  checkedAnswer,
+  answeredCorrectly,
+  correctAnswer,
+  selectedOption,
+}) {
   const options = question.options;
 
+  const disableButtonsUpdateColors = (idx) => {
+    if (answeredCorrectly !== null) {
+      if (idx === correctAnswer) return 'correct';
+      return 'incorrect';
+    }
+  };
+
   return (
-    <ul className={styles.options}>
+    <div className={styles.options}>
       {options.map((option, idx) => (
-        <li
+        <button
           key={option._id}
-          className={styles.option}
+          className={`${styles.option} ${
+            checkedAnswer && 'disabled'
+          } ${disableButtonsUpdateColors(idx)} ${
+            selectedOption === idx && styles.clicked
+          }`}
           onClick={() => dispatch({ type: 'clicked', payload: idx })}
         >
           {option.tagalog}
-        </li>
+        </button>
       ))}
-    </ul>
+    </div>
   );
 }
 
