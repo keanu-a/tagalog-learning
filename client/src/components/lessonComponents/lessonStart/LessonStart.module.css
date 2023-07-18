@@ -18,6 +18,10 @@
   justify-content: center;
 }
 
+.prompt div p {
+  font-size: 1.5rem;
+}
+
 .title {
   text-transform: capitalize;
 }

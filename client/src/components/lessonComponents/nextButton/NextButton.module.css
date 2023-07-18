@@ -1,0 +1,8 @@
+.btn {
+  padding: 1rem;
+}
+
+.disabled {
+  opacity: 40%;
+  pointer-events: none;
+}

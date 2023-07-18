@@ -1,7 +1,5 @@
 import styles from './LessonStart.module.css';
 
-import NextButton from '../nextButton/NextButton';
-
 function LessonStart({ title, dispatch }) {
   return (
     <div className={styles.start}>
@@ -12,7 +10,12 @@ function LessonStart({ title, dispatch }) {
 
         <div>
           <p>Are you ready?</p>
-          <NextButton text="Ready" dispatch={dispatch} dispatchType="start" />
+          <button
+            className={styles.btnStart}
+            onClick={() => dispatch({ type: 'start' })}
+          >
+            Ready
+          </button>
         </div>
       </div>
     </div>

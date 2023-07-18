@@ -54,8 +54,44 @@ h3 {
 }
 
 progress {
-  /* -webkit-appearance: none; */
-  max-width: 1080px;
-  height: 12px;
-  grid-column: 1 / -1;
+  width: 70%;
+  display: flex;
+  font-size: 1rem;
+  margin: 0 auto;
+  background-color: white;
+}
+
+progress::-webkit-progress-bar {
+  background-color: var(--color-light--2);
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.071) inset;
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--color-brand--1);
+  border-radius: 20px;
+}
+
+progress::-moz-progress-value {
+  background-color: var(--color-brand--1);
+  border-radius: 20px;
+}
+
+button {
+  height: 3rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+
+  font-size: 1.5rem;
+  font-family: inherit;
+  transition: 300ms;
+
+  background-color: var(--color-brand--2);
+  color: var(--color-brand--3);
+}
+
+button:hover {
+  background-color: var(--color-brand--3);
+  color: var(--color-brand--2);
 }
