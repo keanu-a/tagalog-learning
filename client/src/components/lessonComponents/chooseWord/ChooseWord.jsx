@@ -1,11 +1,13 @@
-import React from 'react';
+import styles from './ChooseWord.module.css';
 
 const ChooseWord = ({ question }) => {
   return (
-    <div className="question-container">
-      <div className="instruction">Choose the correct translation</div>
-      <div className="question">
-        How do you say "{question.word.english}" in Tagalog?
+    <div className={styles.chooseWord}>
+      <div className={styles.prompt}>Choose the correct translation</div>
+      <div className={styles.question}>
+        <span>How do you say</span>
+        <span className={styles.word}>{question.word.english}</span>
+        <span>in Tagalog?</span>
       </div>
     </div>
   );

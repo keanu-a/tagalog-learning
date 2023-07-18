@@ -54,7 +54,7 @@ h3 {
 }
 
 progress {
-  width: 70%;
+  width: 80%;
   display: flex;
   font-size: 1rem;
   margin: 0 auto;
@@ -110,8 +110,18 @@ button:hover {
   color: #fff;
 }
 
+.correct:hover {
+  background-color: var(--color-correct--0);
+  color: #fff;
+}
+
 /* This class is for showing incorrect answer */
 .incorrect {
+  background-color: var(--color-brand--1);
+  color: #fff;
+}
+
+.incorrect:hover {
   background-color: var(--color-brand--1);
   color: #fff;
 }

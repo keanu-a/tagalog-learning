@@ -1,0 +1,36 @@
+.chooseWord {
+  width: fit-content;
+  background: linear-gradient(0deg, rgb(254, 203, 0) 0%, rgb(206, 17, 39) 86%);
+  padding: 2rem;
+  border-radius: 20px;
+
+  color: #fff;
+}
+
+.chooseWord div {
+  text-align: center;
+}
+
+.prompt {
+  width: 100%;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #fff;
+  margin-bottom: 0.5rem;
+}
+
+.question {
+  font-size: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.word {
+  margin-top: 0.2rem;
+  background-color: #fff;
+  padding: 0 1rem;
+  border-radius: 20px;
+  width: fit-content;
+  color: var(--color-brand--1);
+}

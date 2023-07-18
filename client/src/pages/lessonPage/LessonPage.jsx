@@ -11,17 +11,18 @@ import FillBlank from './fillBlank/FillBlank';
 import Conjugate from './conjugate/Conjugate';
 
 import LessonStart from '../../components/lessonComponents/lessonStart/LessonStart';
-import LessonButton from '../../components/lessonComponents/lessonButton/LessonButton';
+import CheckButton from '../../components/lessonComponents/CheckButton';
+import NextButton from '../../components/lessonComponents/NextButton';
 import Options from '../../components/lessonComponents/options/Options';
 
 const initialState = {
   questions: [],
+  correctAnswer: null,
 
   // 'loading', 'error', 'ready', 'active', 'finished'
   status: 'loading',
   questionIdx: 0,
   selectedOption: null,
-  correctAnswer: null,
   checkedAnswer: false,
   answeredCorrectly: null,
 };
@@ -123,11 +124,7 @@ const LessonPage = () => {
       {/* ONLY SHOW PROGRES BAR IF ACTIVE OR FINISHED */}
       {(status === 'active' || status === 'finished') && (
         <div className={styles.header}>
-          <progress
-            className={styles.progress}
-            max={amountOfQuestions}
-            value={questionIdx}
-          />
+          <progress max={amountOfQuestions} value={questionIdx} />
         </div>
       )}
 
@@ -155,14 +152,16 @@ const LessonPage = () => {
             selectedOption={selectedOption}
           />
 
-          <LessonButton
-            dispatch={dispatch}
-            questionIdx={questionIdx}
-            amountOfQuestions={amountOfQuestions}
-            selectedOption={selectedOption}
-            checkedAnswer={checkedAnswer}
-            answeredCorrectly={answeredCorrectly}
-          />
+          {!checkedAnswer ? (
+            <CheckButton dispatch={dispatch} selectedOption={selectedOption} />
+          ) : (
+            <NextButton
+              dispatch={dispatch}
+              questionIdx={questionIdx}
+              amountOfQuestions={amountOfQuestions}
+              answeredCorrectly={answeredCorrectly}
+            />
+          )}
         </div>
       )}
 
