@@ -15,7 +15,7 @@
 .prompt div {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 }
 
 .prompt div p {
@@ -24,4 +24,5 @@
 
 .title {
   text-transform: capitalize;
+  color: var(--color-brand--1);
 }

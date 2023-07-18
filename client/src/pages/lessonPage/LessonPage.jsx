@@ -5,11 +5,14 @@ import styles from './LessonPage.module.css';
 
 import Logo from '../../components/logo/Logo';
 import Loading from '../../components/loading/Loading';
-import ChooseWord from './chooseWord/ChooseWord';
+
+import ChooseWord from '../../components/lessonComponents/chooseWord/ChooseWord';
 import FillBlank from './fillBlank/FillBlank';
 import Conjugate from './conjugate/Conjugate';
+
 import LessonStart from '../../components/lessonComponents/lessonStart/LessonStart';
 import NextButton from '../../components/lessonComponents/nextButton/NextButton';
+import Options from '../../components/lessonComponents/options/Options';
 
 const initialState = {
   questions: [],
@@ -18,6 +21,7 @@ const initialState = {
   status: 'loading',
   questionIdx: 0,
   selectedOption: null,
+  checkedAnswer: false,
 };
 
 const reducer = (state, action) => {
@@ -35,15 +39,22 @@ const reducer = (state, action) => {
     case 'start':
       return { ...state, status: 'active' };
 
+    // This case is for when a user clicks an option
     case 'clicked':
       // action.payload should be the idx of the option
       return { ...state, selectedOption: action.payload };
 
+    // This case is for when a user clicks the check button
+    case 'check':
+      return { ...state, checkedAnswer: true };
+
+    // This case is for when a user clicks the next button
     case 'next':
       return {
         ...state,
         questionIdx: state.questionIdx + 1,
         selectedOption: null,
+        checkedAnswer: false,
       };
 
     case 'finish':
@@ -55,8 +66,10 @@ const reducer = (state, action) => {
 };
 
 const LessonPage = () => {
-  const [{ questions, status, questionIdx, selectedOption }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { questions, status, questionIdx, selectedOption, checkedAnswer },
+    dispatch,
+  ] = useReducer(reducer, initialState);
   const amountOfQuestions = questions.length;
 
   let { lessonTitle } = useParams();
@@ -72,10 +85,11 @@ const LessonPage = () => {
   return (
     <div className={styles.lessonPage}>
       {status === 'loading' && <Loading />}
-      {status === 'error' && <p>Error</p>}
 
-      {/* ONLY SHOW LOGO IF NOT ERROR OR LOADING */}
-      {status !== 'loading' && status !== 'error' && <Logo lesson={true} />}
+      {/* ONLY SHOW LOGO IF NOT LOADING */}
+      {status !== 'loading' && <Logo lesson={true} />}
+
+      {status === 'error' && <p>Error</p>}
 
       {status === 'ready' && (
         <LessonStart title={lessonTitle} dispatch={dispatch} />
@@ -92,28 +106,31 @@ const LessonPage = () => {
         </div>
       )}
 
-      {status === 'active' &&
-        questions[questionIdx].questionType === 'choose-word' && (
-          <ChooseWord
-            question={questions[questionIdx]}
-            dispatch={dispatch}
-            amountOfQuestions={amountOfQuestions}
-            questionIdx={questionIdx}
-          />
-        )}
-      {status === 'active' &&
-        questions[questionIdx].questionType === 'fill-blank' && <FillBlank />}
-      {status === 'active' &&
-        questions[questionIdx].questionType === 'conjugate' && <Conjugate />}
-
-      {/* ONLY SHOW NEXT BUTTON IF ACTIVE */}
       {status === 'active' && (
-        <NextButton
-          dispatch={dispatch}
-          questionIdx={questionIdx}
-          amountOfQuestions={amountOfQuestions}
-          selectedOption={selectedOption}
-        />
+        <div className={styles.content}>
+          {questions[questionIdx].questionType === 'choose-word' && (
+            <ChooseWord
+              question={questions[questionIdx]}
+              dispatch={dispatch}
+              amountOfQuestions={amountOfQuestions}
+              questionIdx={questionIdx}
+            />
+          )}
+          {questions[questionIdx].questionType === 'fill-blank' && (
+            <FillBlank />
+          )}
+          {questions[questionIdx].questionType === 'conjugate' && <Conjugate />}
+
+          <Options question={questions[questionIdx]} dispatch={dispatch} />
+
+          <NextButton
+            dispatch={dispatch}
+            questionIdx={questionIdx}
+            amountOfQuestions={amountOfQuestions}
+            selectedOption={selectedOption}
+            checkedAnswer={checkedAnswer}
+          />
+        </div>
       )}
 
       {status === 'finished' && <div>Finished</div>}

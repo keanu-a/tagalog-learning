@@ -5,6 +5,7 @@ function NextButton({
   questionIdx,
   amountOfQuestions,
   selectedOption,
+  checkedAnswer,
 }) {
   const NEXT_DISPATCH_TYPE = { type: 'next' };
   const FINISH_DISPATCH_TYPE = { type: 'finish' };
@@ -19,7 +20,7 @@ function NextButton({
         )
       }
       disabled={selectedOption ? false : true}
-      className={selectedOption ? styles.btn : styles.disabled}
+      className={selectedOption ? '' : styles.disabled}
     >
       Next
     </button>
