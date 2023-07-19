@@ -31,11 +31,11 @@ const LearnPage = () => {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
 
       <main>
-        <PageHeader text="Start Learning Tagalog" />
+        <PageHeader text="Lets Start Learning" />
 
         <main className="learning-content">
           <div className="section-picker">
@@ -59,7 +59,9 @@ const LearnPage = () => {
                 className="section-details-start"
                 onClick={() =>
                   navigate(
-                    `sections/${sectionDetails[sectionIdx].title.toLowerCase()}`
+                    `/sections/${sectionDetails[
+                      sectionIdx
+                    ].title.toLowerCase()}`
                   )
                 }
               >
@@ -73,7 +75,7 @@ const LearnPage = () => {
           </div>
         </main>
       </main>
-    </div>
+    </>
   );
 };
 

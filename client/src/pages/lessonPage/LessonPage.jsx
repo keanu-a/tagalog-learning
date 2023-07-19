@@ -138,9 +138,11 @@ const LessonPage = () => {
               questionIdx={questionIdx}
             />
           )}
+
           {questions[questionIdx].questionType === 'fill-blank' && (
             <FillBlank />
           )}
+
           {questions[questionIdx].questionType === 'conjugate' && <Conjugate />}
 
           <Options

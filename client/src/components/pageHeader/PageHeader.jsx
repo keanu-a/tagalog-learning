@@ -1,9 +1,9 @@
 import React from 'react';
 
-import './PageHeader.scss';
+import styles from './PageHeader.module.css';
 
 const PageHeader = ({ text }) => {
-  return <header className="page-header">{text}</header>;
+  return <h2 className={styles.header}>{text}</h2>;
 };
 
 export default PageHeader;

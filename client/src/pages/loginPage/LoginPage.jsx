@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import Navbar from '../../components/navbar/Navbar';
+
 import './LoginPage.scss';
 
 const LoginPage = () => {
@@ -7,6 +9,8 @@ const LoginPage = () => {
 
   return (
     <div className="page-container">
+      <Navbar />
+
       <form className="form" method="post">
         <div className="form-title">SIGN IN</div>
 

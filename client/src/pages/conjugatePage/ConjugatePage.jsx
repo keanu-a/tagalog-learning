@@ -1,16 +1,17 @@
 import React from 'react';
 
 import Navbar from '../../components/navbar/Navbar';
+import PageHeader from '../../components/pageHeader/PageHeader';
 
 import './Conjugate.scss';
 
-const Conjugate = () => {
+const ConjugatePage = () => {
   return (
     <div>
       <Navbar />
 
       <main>
-        <h3>Learn How to Conjugate</h3>
+        <PageHeader text="Lets Conjugate" />
 
         <div className="verb-section">
           <div className="verb-header">Ma- and Mag- Verbs</div>
@@ -48,4 +49,4 @@ const Conjugate = () => {
   );
 };
 
-export default Conjugate;
+export default ConjugatePage;

@@ -1,0 +1,13 @@
+.header {
+  background: linear-gradient(
+    0deg,
+    rgba(254, 203, 0, 1) 0%,
+    rgba(206, 17, 39, 1) 86%
+  );
+  text-align: center;
+  padding: 1rem;
+  width: 50%;
+  color: #fff;
+  border-radius: 20px;
+  margin: 0 auto 1rem auto;
+}

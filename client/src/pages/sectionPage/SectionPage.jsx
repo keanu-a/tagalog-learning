@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import Navbar from '../../components/navbar/Navbar';
 import Loading from '../../components/loading/Loading';
 import PageHeader from '../../components/pageHeader/PageHeader';
 
@@ -34,13 +35,15 @@ const SectionPage = () => {
 
   return (
     <div className="page-container">
+      <Navbar />
+
       <div className="page-content">
         <PageHeader text={capitalize(sectionData.title)} />
 
         <div className="section-lessons">
           {sectionData.lessons.map(({ title }, idx) => {
             return (
-              <div key={idx} onClick={() => navigate(`${title}`)}>
+              <div key={idx} onClick={() => navigate(`/lesson/${title}`)}>
                 {capitalize(title)}
               </div>
             );

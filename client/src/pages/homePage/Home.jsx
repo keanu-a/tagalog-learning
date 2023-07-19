@@ -99,7 +99,7 @@ const homeCards = [
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Navbar />
 
       <main>
@@ -125,7 +125,7 @@ const Home = () => {
           </div>
         </section>
       </main>
-    </div>
+    </>
   );
 };
 
