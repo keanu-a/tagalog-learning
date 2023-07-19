@@ -43,7 +43,7 @@ const Navbar = () => {
           {toggleMenuOpen ? <CloseIcon /> : <MenuIcon />}
         </div>
 
-        <ul>
+        <ul className={toggleMenuOpen ? styles.open : ''}>
           {navLinks.map(({ link, text }) => (
             <li key={text}>
               <NavLink to={link}>{text}</NavLink>
