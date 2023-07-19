@@ -1,9 +1,11 @@
-import React from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import styles from './Navbar.module.css';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 import Logo from '../logo/Logo';
+import styles from './Navbar.module.css';
 
 const navLinks = [
   {
@@ -25,10 +27,21 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const [toggleMenuOpen, setToggleMenuOpen] = useState(false);
+
+  const onMenuClick = () => {
+    setToggleMenuOpen((prev) => !prev);
+  };
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
         <Logo lesson={false} />
+
+        {/* Hamburger menu */}
+        <div className={styles.menu} onClick={onMenuClick}>
+          {toggleMenuOpen ? <CloseIcon /> : <MenuIcon />}
+        </div>
 
         <ul>
           {navLinks.map(({ link, text }) => (

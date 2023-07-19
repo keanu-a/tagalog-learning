@@ -30,7 +30,9 @@ function Logo({ lesson }) {
         width={lesson ? LESSON_IMAGE_SIZE : NAV_IMAGE_SIZE}
         src={logoUrl}
       />
-      <div className={lesson && styles.lessonLogo}>TagalogLearning.com</div>
+      <div className={lesson ? styles.lessonLogo : undefined}>
+        TagalogLearning.com
+      </div>
     </Link>
   );
 }

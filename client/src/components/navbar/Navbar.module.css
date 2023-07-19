@@ -6,6 +6,7 @@
   display: flex;
   max-width: 1200px;
   justify-content: space-between;
+  align-items: center;
   margin: 0 auto;
   font-size: 1.1rem;
   padding: 0 1rem;
@@ -38,4 +39,24 @@
 
 .nav ul a:global(.active) {
   color: var(--color-brand--1);
+}
+
+.menu {
+  display: none;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.menu:hover {
+  color: var(--color-brand--1);
+}
+
+@media (max-width: 900px) {
+  .menu {
+    display: flex;
+  }
+
+  .nav ul {
+    display: none;
+  }
 }
