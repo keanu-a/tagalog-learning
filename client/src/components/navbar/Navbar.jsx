@@ -1,9 +1,28 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import styles from './Navbar.module.css';
 
 import Logo from '../logo/Logo';
+
+const navLinks = [
+  {
+    link: '/learn',
+    text: 'Learn',
+  },
+  {
+    link: '/translate',
+    text: 'Translate',
+  },
+  {
+    link: '/conjugate',
+    text: 'Conjugate',
+  },
+  {
+    link: '/login',
+    text: 'Login',
+  },
+];
 
 const Navbar = () => {
   return (
@@ -12,18 +31,11 @@ const Navbar = () => {
         <Logo lesson={false} />
 
         <ul>
-          <li>
-            <NavLink to="/learn">Learn</NavLink>
-          </li>
-          <li>
-            <NavLink to="/translate">Translate</NavLink>
-          </li>
-          <li>
-            <NavLink to="/conjugate">Conjugate</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
+          {navLinks.map(({ link, text }) => (
+            <li key={text}>
+              <NavLink to={link}>{text}</NavLink>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>

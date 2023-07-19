@@ -107,13 +107,13 @@ const Home = () => {
           <h1>Learn Tagalog Easily</h1>
         </section>
 
-        <section className={styles.home}>
+        <section className="main">
           <h3>How it works</h3>
 
           <HowSection />
         </section>
 
-        <section className={styles.home}>
+        <section className="main">
           <h3>Variety of Lessons</h3>
 
           <div className={styles.lessons}>

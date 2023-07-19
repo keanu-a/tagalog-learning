@@ -15,7 +15,7 @@ function Logo({ lesson }) {
     if (lesson) {
       e.preventDefault();
       const confirm = window.confirm(
-        'Are you sure you want to go back to the home page?'
+        'Progress will not be saved. \nAre you sure you want to go back to the home page?'
       );
 
       if (confirm) navigate('/');

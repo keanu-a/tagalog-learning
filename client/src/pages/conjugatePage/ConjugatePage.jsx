@@ -7,7 +7,7 @@ import './Conjugate.scss';
 
 const ConjugatePage = () => {
   return (
-    <div>
+    <>
       <Navbar />
 
       <main>
@@ -45,7 +45,7 @@ const ConjugatePage = () => {
           <button className="btn-conjugate">Learn</button>
         </div>
       </main>
-    </div>
+    </>
   );
 };
 

@@ -6,6 +6,7 @@ import PageHeader from '../../components/pageHeader/PageHeader';
 import Carousel from '../../components/carousel/Carousel';
 import Map from '../../components/map/Map';
 
+import styles from './LearnPage.module.css';
 import './LearnPage.scss';
 
 const sectionDetails = [
@@ -33,47 +34,42 @@ const LearnPage = () => {
   return (
     <>
       <Navbar />
+      <PageHeader text="Lets Start Learning" />
 
-      <main>
-        <PageHeader text="Lets Start Learning" />
+      <main className={`main ${styles.learn}`}>
+        <section className="section-picker">
+          <Carousel
+            sectionDetails={sectionDetails}
+            cardIdx={sectionIdx}
+            onCardChange={handleLessonChange}
+          />
 
-        <main className="learning-content">
-          <div className="section-picker">
-            <Carousel
-              sectionDetails={sectionDetails}
-              cardIdx={sectionIdx}
-              onCardChange={handleLessonChange}
-            />
-
-            <div className="section-details">
-              <div className="section-details-title">
-                {sectionDetails[sectionIdx].title} in{' '}
-                {sectionDetails[sectionIdx].location}
-              </div>
-
-              <div className="section-details-info">
-                {sectionDetails[sectionIdx].info}
-              </div>
-
-              <button
-                className="section-details-start"
-                onClick={() =>
-                  navigate(
-                    `/sections/${sectionDetails[
-                      sectionIdx
-                    ].title.toLowerCase()}`
-                  )
-                }
-              >
-                START
-              </button>
+          <div className="section-details">
+            <div className="section-details-title">
+              {sectionDetails[sectionIdx].title} in{' '}
+              {sectionDetails[sectionIdx].location}
             </div>
-          </div>
 
-          <div className="section-map">
-            <Map />
+            <div className="section-details-info">
+              {sectionDetails[sectionIdx].info}
+            </div>
+
+            <button
+              className="section-details-start"
+              onClick={() =>
+                navigate(
+                  `/sections/${sectionDetails[sectionIdx].title.toLowerCase()}`
+                )
+              }
+            >
+              START
+            </button>
           </div>
-        </main>
+        </section>
+
+        <section className="section-map">
+          <Map />
+        </section>
       </main>
     </>
   );
