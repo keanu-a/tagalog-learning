@@ -1,0 +1,43 @@
+.container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--color-light--2);
+  padding: 1rem;
+  border-radius: 20px;
+
+  width: 42rem;
+
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+
+  cursor: pointer;
+}
+
+.tagalog {
+  color: var(--color-brand--1);
+}
+
+@media (max-width: 900px) {
+  .container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    width: 90%;
+  }
+
+  .container h3 {
+    font-size: 1.5rem;
+  }
+
+  .container h5 {
+    font-size: 1.1rem;
+  }
+
+  .container p {
+    font-size: 0.8rem;
+  }
+}

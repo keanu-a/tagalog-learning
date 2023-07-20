@@ -7,6 +7,7 @@ import LessonPage from './pages/lessonPage/LessonPage';
 import SectionPage from './pages/sectionPage/SectionPage';
 import LoginPage from './pages/loginPage/LoginPage';
 import TranslatePage from './pages/translatePage/TranslatePage';
+import TranslateWord from './components/translateWord/TranslateWord';
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
         </Route>
 
         <Route path="conjugate" element={<Conjugate />} />
-        <Route path="translate" element={<TranslatePage />} />
+        <Route path="translate" element={<TranslatePage />}>
+          <Route path=":word" element={<TranslateWord />} />
+        </Route>
 
         <Route path="lesson/:lessonTitle" element={<LessonPage />} />
 
