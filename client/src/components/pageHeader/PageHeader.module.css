@@ -10,6 +10,7 @@
   color: #fff;
   border-radius: 20px;
   margin: 0 auto 1rem auto;
+  text-transform: capitalize;
 }
 
 @media (max-width: 600px) {

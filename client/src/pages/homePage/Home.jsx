@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   MdHandshake,
   MdFace,
@@ -15,11 +13,11 @@ import {
   MdFlare,
 } from 'react-icons/md';
 
-import styles from './Home.module.css';
-
 import Card from '../../components/card/Card';
 import Navbar from '../../components/navbar/Navbar';
 import HowSection from '../../components/howSection/HowSection';
+
+import styles from './Home.module.css';
 
 const ICON_SIZE = 80;
 

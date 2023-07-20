@@ -26,11 +26,11 @@
 }
 
 .left {
-  left: -15%;
+  left: -10%;
 }
 
 .right {
-  right: -15%;
+  right: -10%;
 }
 
 /* SECTION INFO CARD */
@@ -50,6 +50,10 @@
   color: var(--color-brand--2);
 }
 
+.card p {
+  font-size: 1.2rem;
+}
+
 /* MEDIA QUERIES */
 @media (min-width: 2000px) {
   .container {
@@ -60,6 +64,10 @@
 @media (max-width: 1280px) {
   .container {
     width: 26rem;
+  }
+
+  .card p {
+    font-size: 1rem;
   }
 
   .left {
@@ -87,7 +95,7 @@
 
 @media (max-width: 500px) {
   .container {
-    width: 16rem;
+    width: 20rem;
   }
 
   .card h3 {
@@ -100,6 +108,20 @@
 
   .card p {
     font-size: 0.8rem;
+  }
+
+  .left {
+    left: -20%;
+  }
+
+  .right {
+    right: -20%;
+  }
+}
+
+@media (max-width: 420px) {
+  .container {
+    width: 16rem;
   }
 
   .left {

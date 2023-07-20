@@ -1,6 +1,7 @@
 .content {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 8rem;
   margin-top: 1rem;
 }
 

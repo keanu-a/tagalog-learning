@@ -15,12 +15,14 @@ function App() {
         <Route index element={<Home />} />
         <Route path="login" element={<LoginPage />} />
 
-        <Route path="learn" element={<LearnPage />} />
+        <Route path="learn" element={<LearnPage />}>
+          <Route path="sections/:sectionTitle" element={<SectionPage />} />
+        </Route>
+
         <Route path="conjugate" element={<Conjugate />} />
         <Route path="translate" element={<TranslatePage />} />
 
         <Route path="lesson/:lessonTitle" element={<LessonPage />} />
-        <Route path="sections/:sectionTitle" element={<SectionPage />} />
 
         <Route path="*" element={<div>ERROR</div>} />
       </Routes>
