@@ -2,7 +2,7 @@
   border: solid 5px var(--color-brand--1);
   padding: 1rem;
   border-radius: 20px;
-  max-width: 450px;
+  max-width: 500px;
 }
 
 .map {
@@ -10,8 +10,26 @@
   max-height: 100%;
 }
 
+@media (min-width: 2000px) {
+  .mapContainer {
+    max-width: 650px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .mapContainer {
+    max-width: 350px;
+  }
+}
+
 @media (max-width: 900px) {
   .mapContainer {
     max-width: 300px;
+  }
+}
+
+@media (max-width: 420px) {
+  .mapContainer {
+    max-width: 220px;
   }
 }

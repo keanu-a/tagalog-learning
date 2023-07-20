@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import batangas from '../../assets/map-batangas.png';
+
 import Navbar from '../../components/navbar/Navbar';
 import PageHeader from '../../components/pageHeader/PageHeader';
 import Carousel from '../../components/carousel/Carousel';
@@ -10,12 +12,13 @@ import styles from './LearnPage.module.css';
 
 const sections = [
   {
-    title: 'Beginner',
+    title: 'beginner',
     location: 'Batangas',
     info: 'You will travel to the city of Batangas, a popular city in the Philippines near Manila. Here you will learn basic words and phrases all Tagalog speakers know!',
+    picture: batangas,
   },
   {
-    title: 'Questions',
+    title: 'questions',
     location: 'Quezon',
     info: 'Next you will travel to the city of Quezon',
   },
@@ -31,7 +34,7 @@ const LearnPage = () => {
   };
 
   const handleStartSection = (sectionTitle) => {
-    navigate(`/sections/${sectionTitle.toLowerCase()}`);
+    navigate(`/sections/${sectionTitle}`);
   };
 
   return (
@@ -46,17 +49,10 @@ const LearnPage = () => {
             sections={sections}
             sectionIdx={sectionIdx}
             onSectionChange={handleSectionChange}
+            handleStartSection={handleStartSection}
           />
 
-          {/* <button
-            onClick={() =>
-              navigate(`/sections/${sections[sectionIdx].title.toLowerCase()}`)
-            }
-          >
-            START
-          </button> */}
-
-          <Map />
+          <Map picture={sections[sectionIdx].picture} />
         </section>
       </main>
     </>

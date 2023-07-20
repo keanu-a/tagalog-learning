@@ -3,10 +3,10 @@ import phBlue from '../../assets/philippines-solid-blue.png';
 
 import styles from './Map.module.css';
 
-const Map = () => {
+const Map = ({ picture }) => {
   return (
     <div className={styles.mapContainer}>
-      <img src={phGreen} className={styles.map} />
+      <img src={picture} className={styles.map} />
     </div>
   );
 };
