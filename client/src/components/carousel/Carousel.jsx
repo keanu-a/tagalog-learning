@@ -14,35 +14,35 @@ const CarouselCard = ({ lessonNumber, title }) => (
   </div>
 );
 
-const Carousel = ({ sectionDetails, cardIdx, onCardChange }) => {
-  const length = sectionDetails.length;
+const Carousel = ({ sections, sectionIdx, onSectionChange }) => {
+  const length = sections.length;
 
-  if (sectionDetails.length <= 0) {
+  if (sections.length <= 0) {
     return null;
   }
 
   const nextCard = () => {
-    const nextIdx = cardIdx + 1;
-    onCardChange(nextIdx);
+    const nextIdx = sectionIdx + 1;
+    onSectionChange(nextIdx);
   };
   const prevCard = () => {
-    const prevIdx = cardIdx - 1;
-    onCardChange(prevIdx);
+    const prevIdx = sectionIdx - 1;
+    onSectionChange(prevIdx);
   };
 
   return (
     <div className="carousel-container">
-      {cardIdx > 0 && (
+      {sectionIdx > 0 && (
         <MdArrowCircleLeft
           size={ARROW_ICON_SIZE}
           onClick={prevCard}
           className="left arrow"
         />
       )}
-      {sectionDetails.map((lesson, idx) => {
+      {sections.map((lesson, idx) => {
         return (
           <div key={idx}>
-            {idx === cardIdx && (
+            {idx === sectionIdx && (
               <CarouselCard
                 key={idx}
                 title={lesson.title}
@@ -52,7 +52,7 @@ const Carousel = ({ sectionDetails, cardIdx, onCardChange }) => {
           </div>
         );
       })}
-      {cardIdx < length - 1 && (
+      {sectionIdx < length - 1 && (
         <MdArrowCircleRight
           size={ARROW_ICON_SIZE}
           onClick={nextCard}

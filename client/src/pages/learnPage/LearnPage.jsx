@@ -7,9 +7,8 @@ import Carousel from '../../components/carousel/Carousel';
 import Map from '../../components/map/Map';
 
 import styles from './LearnPage.module.css';
-import './LearnPage.scss';
 
-const sectionDetails = [
+const sections = [
   {
     title: 'Beginner',
     location: 'Batangas',
@@ -27,47 +26,36 @@ const LearnPage = () => {
 
   const navigate = useNavigate();
 
-  const handleLessonChange = (idx) => {
+  const handleSectionChange = (idx) => {
     setSectionIdx(idx);
+  };
+
+  const handleStartSection = (sectionTitle) => {
+    navigate(`/sections/${sectionTitle.toLowerCase()}`);
   };
 
   return (
     <>
       <Navbar />
-      <PageHeader text="Lets Start Learning" />
 
-      <main className={`main ${styles.learn}`}>
-        <section className="section-picker">
+      <main>
+        <PageHeader text="Lets Start Learning" />
+
+        <section className={styles.content}>
           <Carousel
-            sectionDetails={sectionDetails}
-            cardIdx={sectionIdx}
-            onCardChange={handleLessonChange}
+            sections={sections}
+            sectionIdx={sectionIdx}
+            onSectionChange={handleSectionChange}
           />
 
-          <div className="section-details">
-            <div className="section-details-title">
-              {sectionDetails[sectionIdx].title} in{' '}
-              {sectionDetails[sectionIdx].location}
-            </div>
+          {/* <button
+            onClick={() =>
+              navigate(`/sections/${sections[sectionIdx].title.toLowerCase()}`)
+            }
+          >
+            START
+          </button> */}
 
-            <div className="section-details-info">
-              {sectionDetails[sectionIdx].info}
-            </div>
-
-            <button
-              className="section-details-start"
-              onClick={() =>
-                navigate(
-                  `/sections/${sectionDetails[sectionIdx].title.toLowerCase()}`
-                )
-              }
-            >
-              START
-            </button>
-          </div>
-        </section>
-
-        <section className="section-map">
           <Map />
         </section>
       </main>

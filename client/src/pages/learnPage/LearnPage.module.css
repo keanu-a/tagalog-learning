@@ -1,0 +1,11 @@
+.content {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}

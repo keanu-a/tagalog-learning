@@ -76,7 +76,9 @@ const reducer = (state, action) => {
       };
 
     case 'finish':
-      return { ...state, status: 'finished' };
+      const finalIdx = state.questionIdx + 1;
+
+      return { ...state, status: 'finished', questionIdx: finalIdx };
 
     default:
       throw new Error('Unknown action type');
