@@ -38,8 +38,17 @@ function TranslateWord() {
           <h3 className={styles.tagalog}>{wordData.tagalog}</h3>
           <h5>English: {wordData.english}</h5>
 
-          <p>Part of Speech: {wordData.partOfSpeech}</p>
           <p>Root: {wordData.root}</p>
+          <p>Part of Speech: {wordData.partOfSpeech}</p>
+
+          {wordData.partOfSpeech === 'verb' && (
+            <ul className={styles.tenses}>
+              <h5 className={styles.tensesTitle}>Tenses</h5>
+              <li>Present: {wordData.tenses.present}</li>
+              <li>Past: {wordData.tenses.past}</li>
+              <li>Future: {wordData.tenses.future}</li>
+            </ul>
+          )}
         </div>
       )}
     </>
