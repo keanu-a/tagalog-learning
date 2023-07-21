@@ -7,7 +7,7 @@ import LessonPage from './pages/lessonPage/LessonPage';
 import SectionPage from './pages/sectionPage/SectionPage';
 import LoginPage from './pages/loginPage/LoginPage';
 import TranslatePage from './pages/translatePage/TranslatePage';
-import TranslateWord from './components/translateWord/TranslateWord';
+import Word from './components/word/Word';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
 
         <Route path="conjugate" element={<Conjugate />} />
         <Route path="translate" element={<TranslatePage />}>
-          <Route path=":word" element={<TranslateWord />} />
+          <Route path=":word" element={<Word />} />
         </Route>
 
         <Route path="lesson/:lessonTitle" element={<LessonPage />} />

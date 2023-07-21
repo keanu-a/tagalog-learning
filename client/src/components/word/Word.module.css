@@ -1,21 +1,37 @@
 .container {
   margin-top: 1rem;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 
   background-color: var(--color-light--2);
   padding: 1rem;
   border-radius: 20px;
 
-  width: 42rem;
+  width: 32rem;
 
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
-
-  cursor: pointer;
 }
 
 .tagalog {
   color: var(--color-brand--1);
+  text-transform: capitalize;
+}
+
+.tenses {
+  background-color: var(--color-brand--1);
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  list-style: none;
+}
+
+.conjugations {
+  color: var(--color-brand--2);
+}
+
+.tenses li {
+  color: #fff;
 }
 
 @media (max-width: 900px) {

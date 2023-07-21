@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import styles from './TranslateWord.module.css';
+import styles from './Word.module.css';
 import Loading from '../loading/Loading';
 
 // wordData has attributes like
@@ -13,37 +13,51 @@ import Loading from '../loading/Loading';
 // - tagalog ''
 // - _id ''
 
-function TranslateWord() {
+function Word() {
+  const [isLoading, setIsLoading] = useState(false);
   const [wordData, setWordData] = useState(null);
   const { word } = useParams();
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(`http://localhost:5000/api/v1/word/${word}`)
       .then((res) => res.json())
       .then((data) => {
         setWordData(data.word);
-        console.log(data);
+        setIsLoading(false);
       })
-      .catch((err) => console.error(err.message));
+      .catch((err) => {
+        console.error(err.message);
+        isLoading(false);
+      });
   }, []);
 
   return (
     <>
-      {wordData === null && <Loading />}
+      {/* If loading, show loading */}
+      {isLoading && <Loading />}
 
+      {/* If no word data and not loading, then not found */}
+      {wordData === null && !isLoading && (
+        <div className={styles.container}>Word not Found</div>
+      )}
+
+      {/* If there is word data, display word */}
       {wordData !== null && (
         <div className={styles.container}>
-          <h3 className={styles.tagalog}>{wordData.tagalog}</h3>
-          <h5>English: {wordData.english}</h5>
+          <div>
+            <h3 className={styles.tagalog}>{wordData.tagalog}</h3>
+            <h5>English: {wordData.english}</h5>
 
-          <p>Root: {wordData.root}</p>
-          <p>Part of Speech: {wordData.partOfSpeech}</p>
+            <p>Root: {wordData.root}</p>
+            <p>Part of Speech: {wordData.partOfSpeech}</p>
+          </div>
 
           {wordData.partOfSpeech === 'verb' && (
             <ul className={styles.tenses}>
-              <h5 className={styles.tensesTitle}>Tenses</h5>
+              <h5 className={styles.conjugations}>Conjugations</h5>
               <li>Present: {wordData.tenses.present}</li>
               <li>Past: {wordData.tenses.past}</li>
               <li>Future: {wordData.tenses.future}</li>
@@ -55,4 +69,4 @@ function TranslateWord() {
   );
 }
 
-export default TranslateWord;
+export default Word;
