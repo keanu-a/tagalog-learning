@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 
 import Navbar from '../../components/navbar/Navbar';
 import PageHeader from '../../components/pageHeader/PageHeader';
@@ -15,6 +15,7 @@ const LearnPage = () => {
   const [sectionIdx, setSectionIdx] = useState(0);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSectionChange = (idx) => {
     setSectionIdx(idx);
@@ -24,6 +25,11 @@ const LearnPage = () => {
     setStartedSection(true);
     navigate(`sections/${sectionTitle}`);
   };
+
+  // This accounts for when a user presses back to LearnPage from SectionPage
+  useEffect(() => {
+    if (location.pathname === '/learn') setStartedSection(false);
+  }, [location]);
 
   return (
     <>

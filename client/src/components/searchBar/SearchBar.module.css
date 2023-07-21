@@ -1,6 +1,6 @@
 .search {
   display: flex;
-  width: 28rem;
+  width: 32rem;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
 }
@@ -21,7 +21,7 @@
 }
 
 .input:focus {
-  outline: 2px solid var(--color-brand--1);
+  outline: 2px solid var(--color-brand--3);
 }
 
 @media (max-width: 600px) {
@@ -35,6 +35,6 @@
   }
 
   .input {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 }
