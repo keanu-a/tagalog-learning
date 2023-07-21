@@ -18,6 +18,7 @@ import Navbar from '../../components/navbar/Navbar';
 import HowSection from '../../components/howSection/HowSection';
 
 import styles from './Home.module.css';
+import SearchBar from '../../components/searchBar/SearchBar';
 
 const ICON_SIZE = 80;
 
@@ -103,6 +104,7 @@ const Home = () => {
       <main>
         <section className={styles.hero}>
           <h1>Learn Tagalog Easily</h1>
+          <SearchBar inHome={true} />
         </section>
 
         <section className="main">

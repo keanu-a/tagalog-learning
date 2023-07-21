@@ -5,28 +5,3 @@
   justify-content: center;
   margin-top: 0.5rem;
 }
-
-.search {
-  display: flex;
-  gap: 0.2rem;
-  width: 24rem;
-}
-
-.input {
-  width: 100%;
-  border: 2px solid var(--color-brand--1);
-  border-radius: 20px;
-  font-family: inherit;
-  padding: 0 1rem;
-  font-size: 1.2rem;
-}
-
-@media (max-width: 400px) {
-  .search {
-    width: 20rem;
-  }
-
-  .input {
-    font-size: 0.8rem;
-  }
-}

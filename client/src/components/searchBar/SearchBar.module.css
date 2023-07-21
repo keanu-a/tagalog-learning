@@ -1,0 +1,40 @@
+.search {
+  display: flex;
+  width: 28rem;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.search button {
+  border-radius: 0 20px 20px 0;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  border-radius: 20px 0 0 20px;
+  font-family: inherit;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+
+  background-color: var(--color-light--3);
+}
+
+.input:focus {
+  outline: 2px solid var(--color-brand--1);
+}
+
+@media (max-width: 600px) {
+  .search {
+    width: 20rem;
+    height: 2.5rem;
+  }
+
+  .search button {
+    height: 2.5rem;
+  }
+
+  .input {
+    font-size: 0.8rem;
+  }
+}
