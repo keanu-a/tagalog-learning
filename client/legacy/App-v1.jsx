@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Home from './pages/homePage/Home';
-import LearnPage from './pages/learnPage/LearnPage';
-import Conjugate from './pages/conjugatePage/ConjugatePage';
-import LessonPage from './pages/lessonPage/LessonPage';
-import SectionPage from './pages/sectionPage/SectionPage';
-import LoginPage from './pages/loginPage/LoginPage';
-import TranslatePage from './pages/translatePage/TranslatePage';
-import Word from './components/word/Word';
+import Home from '../src/pages/homePage/Home';
+import LearnPage from '../src/pages/learnPage/LearnPage';
+import Conjugate from '../src/pages/conjugatePage/ConjugatePage';
+import LessonPage from '../src/pages/lessonPage/LessonPage';
+import SectionPage from '../src/pages/sectionPage/SectionPage';
+import LoginPage from '../src/pages/loginPage/LoginPage';
+import TranslatePage from '../src/pages/translatePage/TranslatePage';
+import Word from '../src/components/word/Word';
 
 function App() {
   return (

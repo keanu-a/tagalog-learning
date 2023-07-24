@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     element: <LearnPage />,
     children: [
       {
-        path: '/sections/:sectionTitle',
+        path: 'sections/:sectionTitle',
         element: <SectionPage />,
       },
     ],
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     element: <TranslatePage />,
     children: [
       {
-        path: '/:word',
+        path: ':word',
         element: <Word />,
       },
     ],

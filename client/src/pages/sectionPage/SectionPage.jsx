@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Loading from '../../components/loading/Loading';
 import PageHeader from '../../components/pageHeader/PageHeader';
@@ -7,10 +7,10 @@ import PageHeader from '../../components/pageHeader/PageHeader';
 import styles from './SectionPage.module.css';
 
 const SectionPage = () => {
+  const navigate = useNavigate();
+
   const [sectionData, setSectionData] = useState(null);
   const { sectionTitle } = useParams();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchSection() {

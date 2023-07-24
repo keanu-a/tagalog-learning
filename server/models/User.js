@@ -24,7 +24,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     enum: ['user', 'admin'],
     default: 'user',
-    select: false,
   },
   password: {
     type: String,
@@ -58,6 +57,11 @@ UserSchema.pre('save', async function (next) {
   // Only run this function if password was actually modified
   if (!this.isModified('password')) return next();
 
+  // Making sure password length is still 8 characters minimum like the Schema
+  if (this.password.length < 8) {
+    return next(new Error('Minimum password length is 8 characters'));
+  }
+
   // Hash password with salt cost of 12
   this.password = await bcrypt.hash(this.password, 12);
 
@@ -73,11 +77,15 @@ UserSchema.pre('save', function (next) {
 });
 
 //* USER METHODS *//
-UserSchema.methods.correctPassword = async (
+UserSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
-) => {
-  return await bcrypt.compare(candidatePassword, userPassword);
+) {
+  try {
+    return await bcrypt.compare(candidatePassword, userPassword);
+  } catch (err) {
+    throw new Error('Error comparing passwords');
+  }
 };
 
 UserSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
@@ -102,7 +110,6 @@ UserSchema.methods.createPasswordResetToken = function () {
     .update(resetToken)
     .digest('hex');
 
-  // Console.log() will be showing this in UTC (Universal standard time)
   // 10 * 60 seconds * 1000 (ms)
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 

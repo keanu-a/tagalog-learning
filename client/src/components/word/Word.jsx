@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import styles from './Word.module.css';
 import Loading from '../loading/Loading';
@@ -17,8 +17,6 @@ function Word() {
   const [isLoading, setIsLoading] = useState(false);
   const [wordData, setWordData] = useState(null);
   const { word } = useParams();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);

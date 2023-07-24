@@ -1,17 +1,17 @@
 import { useState } from 'react';
-
-import styles from './SearchBar.module.css';
 import { useNavigate } from 'react-router-dom';
 
 import SearchIcon from '@mui/icons-material/Search';
 
-function SearchBar({ inHome }) {
-  const [searchValue, setSearchValue] = useState('');
+import styles from './SearchBar.module.css';
 
+function SearchBar({ inHome }) {
   const navigate = useNavigate();
 
+  const [searchValue, setSearchValue] = useState('');
+
   const handleOnSubmit = () => {
-    if (inHome === true) navigate(`translate/${searchValue}`);
+    if (inHome) navigate(`translate/${searchValue}`);
     else navigate(searchValue);
   };
 
@@ -24,7 +24,7 @@ function SearchBar({ inHome }) {
         onChange={(e) => setSearchValue(e.target.value)}
         className={styles.input}
       />
-      <button className={styles.btn} onClick={handleOnSubmit}>
+      <button className={styles.btn} onClick={handleOnSubmit} type="button">
         <SearchIcon />
       </button>
     </form>

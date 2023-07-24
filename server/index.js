@@ -17,10 +17,8 @@ const Word = require('./models/Word.js');
 const Phrase = require('./models/Phrase.js');
 const Lesson = require('./models/Lesson.js');
 const Section = require('./models/Section.js');
-const { dataWord } = require('./data/word-data.js');
 const { dataPhrase } = require('./data/phrase-data.js');
-const { dataLesson } = require('./data/lesson-data.js');
-const { lessonOneWordData } = require('./data/words.js');
+const { wordData } = require('./data/words/words.js');
 const { lessonOnePhraseData } = require('./data/phrases.js');
 const { lessonOneLessonData } = require('./data/lessons.js');
 const { sectionBeginnerData } = require('./data/sections.js');
@@ -60,9 +58,10 @@ mongoose
     // Inserting data, REMEMBER comment out
 
     // INSERTING LESSON ONE WORD DATA 5/10
-    // Word.insertMany(lessonOneWordData).then(() =>
+    // Word.insertMany(wordData).then(() =>
     //   console.log('Words were added to the database!')
     // );
+
     // Phrase.insertMany(lessonOnePhraseData).then(() =>
     //   console.log('Phrases were added to the database!')
     // );
