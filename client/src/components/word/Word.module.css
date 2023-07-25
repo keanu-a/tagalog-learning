@@ -18,6 +18,24 @@
   text-transform: capitalize;
 }
 
+.translation {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.english {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.english h5 {
+  background-color: var(--color-brand--2);
+  padding: 0 0.8rem;
+  border-radius: 20px;
+}
+
 .tenses {
   background-color: var(--color-brand--1);
   width: fit-content;

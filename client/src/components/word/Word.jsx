@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import styles from './Word.module.css';
 import Loading from '../loading/Loading';
 
+import normalizeString from '../../utils/normalizeString';
+
 // wordData has attributes like
 // - english ''
 // - examples (array)
@@ -24,46 +26,49 @@ function Word() {
       .then((res) => res.json())
       .then((data) => {
         setWordData(data.word);
-        setIsLoading(false);
       })
       .catch((err) => {
         console.error(err.message);
+      })
+      .finally(() => {
         isLoading(false);
       });
   }, []);
 
+  if (isLoading) return <Loading />;
+
+  if (!wordData) return <div className={styles.container}>Word not Found</div>;
+
   return (
-    <>
-      {/* If loading, show loading */}
-      {isLoading && <Loading />}
-
-      {/* If no word data and not loading, then not found */}
-      {wordData === null && !isLoading && (
-        <div className={styles.container}>Word not Found</div>
-      )}
-
-      {/* If there is word data, display word */}
-      {wordData !== null && (
-        <div className={styles.container}>
-          <div>
-            <h3 className={styles.tagalog}>{wordData.tagalog}</h3>
-            <h5>English: {wordData.english}</h5>
-
-            <p>Root: {wordData.root}</p>
-            <p>Part of Speech: {wordData.partOfSpeech}</p>
+    <div className={styles.container}>
+      <div>
+        <h3 className={styles.tagalog}>{normalizeString(wordData.tagalog)}</h3>
+        <div className={styles.translation}>
+          <h5>English: </h5>
+          <div className={styles.english}>
+            {wordData.english.map((word, idx) => (
+              <h5 key={idx}>{word}</h5>
+            ))}
           </div>
-
-          {wordData.partOfSpeech === 'verb' && (
-            <ul className={styles.tenses}>
-              <h5 className={styles.conjugations}>Conjugations</h5>
-              <li>Present: {wordData.tenses.present}</li>
-              <li>Past: {wordData.tenses.past}</li>
-              <li>Future: {wordData.tenses.future}</li>
-            </ul>
-          )}
         </div>
+
+        <p>Root: {wordData.root}</p>
+        <p>Part of Speech: {wordData.partOfSpeech}</p>
+      </div>
+
+      {wordData.partOfSpeech === 'verb' && (
+        <ul className={styles.tenses}>
+          <h5 className={styles.conjugations}>Conjugations</h5>
+          <li>PAST: {normalizeString(wordData.conjugations.past.tagalog)}</li>
+          <li>
+            PRESENT: {normalizeString(wordData.conjugations.present.tagalog)}
+          </li>
+          <li>
+            FUTURE: {normalizeString(wordData.conjugations.future.tagalog)}
+          </li>
+        </ul>
       )}
-    </>
+    </div>
   );
 }
 
