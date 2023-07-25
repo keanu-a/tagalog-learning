@@ -17,13 +17,9 @@ const Word = require('./models/Word.js');
 const Phrase = require('./models/Phrase.js');
 const Lesson = require('./models/Lesson.js');
 const Section = require('./models/Section.js');
-const { dataPhrase } = require('./data/phrase-data.js');
-const { wordData } = require('./data/words/words.js');
-const { lessonOnePhraseData } = require('./data/phrases.js');
-const { lessonOneLessonData } = require('./data/lessons.js');
-const { sectionBeginnerData } = require('./data/sections.js');
 
-const { updateWord } = require('./controllers/wordController.js');
+const { phraseData } = require('./data/phrases/phrases.js');
+const { wordData } = require('./data/words/words.js');
 
 //* CONFIGURATIONS *//
 dotenv.config();
@@ -61,6 +57,7 @@ mongoose
     // Word.insertMany(wordData).then(() =>
     //   console.log('Words were added to the database!')
     // );
+    // Word.create();
 
     // Phrase.insertMany(lessonOnePhraseData).then(() =>
     //   console.log('Phrases were added to the database!')

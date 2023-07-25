@@ -1,4 +1,4 @@
-const { lessonOneWordData } = require('./lessonOneWords');
-const { lessonTwoWordData } = require('./lessonTwoWords');
+const { lessonOneWordData } = require('./lessonOneWords.js');
+const { lessonTwoWordData } = require('./lessonTwoWords.js');
 
 module.exports.wordData = [...lessonOneWordData, ...lessonTwoWordData];

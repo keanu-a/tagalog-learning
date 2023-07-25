@@ -1,5 +1,13 @@
-const mongoose = require('mongoose');
 const Word = require('../models/Word.js');
+
+function diacriticSensitiveRegex(string) {
+  return string
+    .replace(/a/g, '[a,á]')
+    .replace(/e/g, '[e,é]')
+    .replace(/i/g, '[i,í]')
+    .replace(/o/g, '[o,ó]')
+    .replace(/u/g, '[u,ú]');
+}
 
 // This function gets only one word
 module.exports.getWord = async (req, res) => {
@@ -7,13 +15,25 @@ module.exports.getWord = async (req, res) => {
     const { word } = req.params;
     const foundWord = await Word.findOne({
       $or: [
-        { tagalog: word },
+        { tagalog: { $regex: diacriticSensitiveRegex(word) } },
         { english: { $in: [word] } },
-        { 'conjugations.past.tagalog': word },
+        {
+          'conjugations.past.tagalog': {
+            $regex: diacriticSensitiveRegex(word),
+          },
+        },
         { 'conjugations.past.english': word },
-        { 'conjugations.present.tagalog': word },
+        {
+          'conjugations.present.tagalog': {
+            $regex: diacriticSensitiveRegex(word),
+          },
+        },
         { 'conjugations.present.english': word },
-        { 'conjugations.future.tagalog': word },
+        {
+          'conjugations.future.tagalog': {
+            $regex: diacriticSensitiveRegex(word),
+          },
+        },
         { 'conjugations.future.english': word },
       ],
     });
@@ -30,50 +50,43 @@ module.exports.getWord = async (req, res) => {
 };
 
 // This function gets all words related to the parameters
-module.exports.getRelatedWords = async (req, res) => {
+module.exports.getWords = async (req, res) => {
   try {
-    const { root } = req.params;
+    const { query } = req.params;
 
-    const foundWords = await Word.find({ root: root }).limit(3);
+    const foundWords = await Word.find({
+      $or: [
+        { tagalog: { $regex: diacriticSensitiveRegex(query) } },
+        { english: { $in: [query] } },
+        { root: query },
+        {
+          'conjugations.past.tagalog': {
+            $regex: diacriticSensitiveRegex(query),
+          },
+        },
+        { 'conjugations.past.english': query },
+        {
+          'conjugations.present.tagalog': {
+            $regex: diacriticSensitiveRegex(query),
+          },
+        },
+        { 'conjugations.present.english': query },
+        {
+          'conjugations.future.tagalog': {
+            $regex: diacriticSensitiveRegex(query),
+          },
+        },
+        { 'conjugations.future.english': query },
+      ],
+    }).limit(3);
 
     // If words found, return words
     if (foundWords.length > 0) {
       res.status(200).json({ status: 'success', words: foundWords });
     } else {
-      res
-        .status(404)
-        .json({ status: 'fail', message: `No words with root: ${root}` });
+      res.status(404).json({ status: 'fail', message: `No words found` });
     }
   } catch (error) {
     res.status(400).json({ status: 'fail', message: error.message });
   }
-};
-
-module.exports.updateWord = async (word) => {
-  const presentId = new mongoose.Types.ObjectId();
-  const pastId = new mongoose.Types.ObjectId();
-  const futureId = new mongoose.Types.ObjectId();
-
-  await Word.findOneAndUpdate(
-    { tagalog: word },
-    {
-      tenses: {
-        present: {
-          _id: presentId,
-          tagalog: 'natutulog',
-          english: 'sleeping',
-        },
-        past: {
-          _id: pastId,
-          tagalog: 'natulog',
-          english: 'slept',
-        },
-        future: {
-          _id: futureId,
-          tagalog: 'matutulog',
-          english: 'will sleep',
-        },
-      },
-    }
-  );
 };

@@ -20,9 +20,13 @@ module.exports.getLesson = async (req, res) => {
           select: 'present past future',
         },
       });
-    // .populate('questions.options')
 
-    res.status(200).json({ status: 'success', lesson: foundLesson });
+    // If word found, return word
+    if (foundLesson) {
+      res.status(200).json({ status: 'success', lesson: foundLesson });
+    } else {
+      res.status(404).json({ status: 'fail', message: 'Lesson not found' });
+    }
   } catch (error) {
     res.status(404).json({ status: 'fail', message: error.message });
   }

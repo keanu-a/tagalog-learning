@@ -1,22 +1,75 @@
 module.exports.lessonTwoWordData = [
   {
-    tagalog: 'matúlog',
-    english: ['to sleep'],
-    root: 'tulog',
-    partOfSpeech: 'verb',
-    conjugations: {
-      past: {
-        tagalog: 'natúlog',
-        english: 'slept',
-      },
-      present: {
-        tagalog: 'natutúlog',
-        english: 'sleeping',
-      },
-      future: {
-        tagalog: 'matutúlog',
-        english: 'will sleep',
-      },
-    },
+    tagalog: 'ng',
+    english: ['a', 'an', 'of', 'by'],
+    root: 'ng',
+    partOfSpeech: 'article',
+    note: 'Also could be added to an end of a word to connect two words',
+  },
+  {
+    tagalog: 'kamí',
+    english: ['we', 'excluding listener'],
+    root: 'kami',
+    partOfSpeech: 'pronoun',
+  },
+  {
+    tagalog: 'táyo',
+    english: ['we', 'including listener'],
+    root: 'tayo',
+    partOfSpeech: 'pronoun',
+  },
+  {
+    tagalog: 'silá',
+    english: ['they'],
+    root: 'sila',
+    partOfSpeech: 'pronoun',
+  },
+  {
+    tagalog: 'námin',
+    english: ['ours', 'excluding listener'],
+    root: 'namin',
+    partOfSpeech: 'pronoun',
+  },
+  {
+    tagalog: 'nátin',
+    english: ['ours', 'including listener'],
+    root: 'natin',
+    partOfSpeech: 'pronoun',
+  },
+  {
+    tagalog: 'nilá',
+    english: ['their'],
+    root: 'nila',
+    partOfSpeech: 'pronoun',
+  },
+  {
+    tagalog: 'siná',
+    english: ['Subject marker: Placed before names (Plural)'],
+    root: 'si',
+    partOfSpeech: 'preposition',
+  },
+  {
+    tagalog: 'mga',
+    english: ['Used before a noun to make it plural'],
+    root: 'mga',
+    partOfSpeech: 'article',
+  },
+  {
+    tagalog: 'at',
+    english: ['and'],
+    root: 'at',
+    partOfSpeech: 'conjunction',
+  },
+  {
+    tagalog: 'táo',
+    english: ['person'],
+    root: 'tao',
+    partOfSpeech: 'noun',
+  },
+  {
+    tagalog: 'magandá',
+    english: ['beautiful', 'good', 'pretty'],
+    root: 'ganda',
+    partOfSpeech: 'adjective',
   },
 ];

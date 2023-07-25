@@ -194,4 +194,62 @@ module.exports.lessonOneWordData = [
       },
     },
   },
+  {
+    tagalog: 'pó',
+    english: ['sir', "ma'am"],
+    root: 'po',
+    partOfSpeech: 'particle',
+    note: 'Used to show respect, typically for elders',
+  },
+  {
+    tagalog: 'ópo',
+    english: ['yes (polite)', 'yes sir', "yes ma'am"],
+    root: 'oo',
+    partOfSpeech: 'adverb',
+    note: 'Used to say yes politely, typically for elder',
+  },
+  {
+    tagalog: 'kayó',
+    english: ['you (polite)', 'you (plural)'],
+    root: 'kayo',
+    partOfSpeech: 'pronoun',
+  },
+  {
+    tagalog: 'ninyó',
+    english: ['your (polite)', 'your (plural)'],
+    root: 'ninyo',
+    partOfSpeech: 'pronoun',
+  },
+  {
+    tagalog: 'magtúro',
+    english: ['to teach', 'to tutor'],
+    root: 'turo',
+    partOfSpeech: 'verb',
+    conjugations: {
+      past: {
+        tagalog: 'nagtúro',
+        english: 'taught',
+      },
+      present: {
+        tagalog: 'nagtutúro',
+        english: 'teaching',
+      },
+      future: {
+        tagalog: 'magtutúro',
+        english: 'will teach',
+      },
+    },
+  },
+  {
+    tagalog: 'ospitál',
+    english: ['hospital'],
+    root: 'ospital',
+    partOfSpeech: 'noun',
+  },
+  {
+    tagalog: 'páaralán',
+    english: ['school'],
+    root: 'aral',
+    partOfSpeech: 'noun',
+  },
 ];
