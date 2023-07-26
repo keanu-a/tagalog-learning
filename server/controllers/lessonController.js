@@ -6,7 +6,7 @@ module.exports.getLesson = async (req, res) => {
     const foundLesson = await Lesson.findOne({ title: lessonTitle })
       .populate({
         path: 'questions.word',
-        select: 'tagalog english',
+        select: 'tagalog english partOfSpeech',
       })
       .populate({
         path: 'questions.phrase',
@@ -15,10 +15,10 @@ module.exports.getLesson = async (req, res) => {
       .populate({
         path: 'questions.options',
         select: 'tagalog english partOfSpeech',
-        populate: {
-          path: 'tenses',
-          select: 'present past future',
-        },
+        // populate: {
+        //   path: 'conjugations',
+        //   select: 'past present future',
+        // },
       });
 
     // If word found, return word

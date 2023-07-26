@@ -26,11 +26,29 @@
   justify-content: center;
 }
 
+.wordContainer {
+  position: relative;
+}
+
+.wordContainer:hover .moreEnglish {
+  visibility: visible;
+}
+
 .word {
   margin-top: 0.2rem;
   background-color: #fff;
   padding: 0 1rem;
-  border-radius: 20px;
+  border-radius: 10px;
   width: fit-content;
   color: var(--color-brand--1);
+  user-select: none;
+}
+
+.moreEnglish {
+  background-color: var(--color-light--1);
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  position: absolute;
+  visibility: hidden;
 }

@@ -1,3 +1,50 @@
+module.exports.lessonOnePhraseTest = [
+  {
+    tagalog: 'Ano ang pangalan mo?',
+    english: 'What is your name?',
+    words: [
+      '64be1b8b44afae50efbb139f',
+      '64be1b8b44afae50efbb139d',
+      '64be1b8b44afae50efbb13a2',
+      '64be1b8b44afae50efbb139a',
+    ],
+  },
+  {
+    tagalog: 'Ako si {name}.',
+    english: 'I am {name}.',
+    words: ['64be1b8b44afae50efbb1395', '64be1b8b44afae50efbb139c'],
+  },
+  {
+    tagalog: 'Nag-aaral ako sa {school}.',
+    english: 'I study at the {school}.',
+    words: [
+      '64be1b8b44afae50efbb13b1',
+      '64be1b8b44afae50efbb1395',
+      '64be1b8b44afae50efbb13aa',
+    ],
+  },
+  {
+    tagalog: 'Nagtatrabaho ako sa ospital.',
+    english: 'I work at the hospital.',
+    words: [
+      '64be1b8b44afae50efbb13b6',
+      '64be1b8b44afae50efbb1395',
+      '64be1b8b44afae50efbb13aa',
+      '64bf0f1da71ae3a6a66ef390',
+    ],
+  },
+  {
+    tagalog: 'Nag-aral ka. Nag-aaral ako',
+    english: 'You studied. I am studying',
+    words: [
+      '64be1b8b44afae50efbb13b0',
+      '64be1b8b44afae50efbb1397',
+      '64be1b8b44afae50efbb13b1',
+      '64be1b8b44afae50efbb1395',
+    ],
+  },
+];
+
 module.exports.lessonOnePhraseData = [
   {
     tagalog: 'Ako si {name}.',

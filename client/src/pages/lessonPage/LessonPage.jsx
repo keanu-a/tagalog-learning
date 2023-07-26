@@ -133,16 +133,19 @@ const LessonPage = () => {
       {status === 'active' && (
         <div className={styles.content}>
           {questions[questionIdx].questionType === 'choose-word' && (
-            <ChooseWord
-              question={questions[questionIdx]}
-              dispatch={dispatch}
-              amountOfQuestions={amountOfQuestions}
-              questionIdx={questionIdx}
-            />
+            <ChooseWord question={questions[questionIdx]} />
+          )}
+
+          {questions[questionIdx].questionType === 'answer-phrase' && (
+            <p>Answer Phrase</p>
           )}
 
           {questions[questionIdx].questionType === 'fill-blank' && (
             <FillBlank />
+          )}
+
+          {questions[questionIdx].questionType === 'translate-phrase' && (
+            <p>Translate Phrase</p>
           )}
 
           {questions[questionIdx].questionType === 'conjugate' && <Conjugate />}

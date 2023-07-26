@@ -14,59 +14,66 @@ const LessonSchema = new mongoose.Schema({
         enum: [
           'choose-word',
           'answer-phrase',
-          'translate-phrase',
           'fill-blank',
+          'translate-phrase',
           'conjugate',
         ],
       },
       word: {
         type: mongoose.Types.ObjectId,
         ref: 'Word',
-        required: this.questionType === 'choose-word',
+        validate: {
+          validator: function () {
+            return this.questionType === 'choose-word';
+          },
+          message: 'word field is required for choose-word question type',
+        },
       },
       phrase: {
         type: mongoose.Types.ObjectId,
         ref: 'Phrase',
-        required: this.questionType !== 'choose-word',
+        validate: {
+          validator: function () {
+            return this.questionType !== 'choose-word';
+          },
+          message:
+            'phrase field is required for NON choose-word question types',
+        },
       },
       hideWord: {
         type: Number,
-        required: this.questionType === 'fill-blank',
+        validate: {
+          validator: function () {
+            return this.questionType === 'fill-blank';
+          },
+          message: 'hideWord field required for fill-blank',
+        },
       },
       options: {
         type: [
           {
             type: mongoose.Types.ObjectId,
             ref: 'Word',
-            required: [
-              this.questionType !== 'answer-phrase',
-              'Must provide word options if question type is NOT answer-phrase',
-            ],
           },
           {
             type: mongoose.Types.ObjectId,
             ref: 'Phrase',
-            required: [
-              this.questionType === 'answer-phrase',
-              'Must provide phrase options if question type is answer-phrase',
-            ],
           },
         ],
         required: [true, 'Lesson must have options'],
       },
       answer: {
         type: Number,
-        required: [
-          function () {
-            if (
-              this.questionType === 'conjugate' ||
-              this.questionType === 'translate-phrase'
-            )
-              return false;
-            else return true;
+        validate: {
+          validator: function () {
+            return (
+              this.questionType !== 'conjugate' &&
+              this.questionType !== 'translate-phrase'
+            );
           },
-          'Lesson must specify which index in the options array is the answer',
-        ],
+          message:
+            'Answer number index is required for NON conjugate and translate-phrase question type',
+        },
       },
     },
   ],

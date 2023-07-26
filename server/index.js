@@ -18,8 +18,14 @@ const Phrase = require('./models/Phrase.js');
 const Lesson = require('./models/Lesson.js');
 const Section = require('./models/Section.js');
 
-const { phraseData } = require('./data/phrases/phrases.js');
 const { wordData } = require('./data/words/words.js');
+
+const { phraseData } = require('./data/phrases/phrases.js');
+const { test } = require('./data/phrases/lessonOnePhrases.js');
+
+const { lessonOneTest } = require('./data/lessons/lessonOne.js');
+
+const { sectionOneTest } = require('./data/sections/sections.js');
 
 //* CONFIGURATIONS *//
 dotenv.config();
@@ -57,27 +63,17 @@ mongoose
     // Word.insertMany(wordData).then(() =>
     //   console.log('Words were added to the database!')
     // );
-    // Word.create();
 
-    // Phrase.insertMany(lessonOnePhraseData).then(() =>
+    // Phrase.insertMany(test).then(() =>
     //   console.log('Phrases were added to the database!')
     // );
-    // Lesson.insertMany(lessonOneLessonData).then(() =>
+
+    // Lesson.insertMany(lessonOneTest).then(() =>
     //   console.log('Lessons were added to the database!')
     // );
-    // Section.insertMany(sectionBeginnerData).then(() =>
+
+    // Section.insertMany(sectionOneTest).then(() =>
     //   console.log('Sections were added to the database!')
-    // );
-    // updateWord('matulog').then(() => console.log('Word updated'));
-
-    // Word.insertMany(dataWord).then(() =>
-    //   console.log('Words were added to the database!')
-    // );
-    // Phrase.insertMany(dataPhrase).then(() =>
-    //   console.log('Phrases were added to the database!')
-    // );
-    // Lesson.insertMany(dataLesson).then(() =>
-    //   console.log('Lessons were added to the database!')
     // );
   })
   .catch((error) => console.log(`${error} did not connect`));

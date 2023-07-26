@@ -1,6 +1,6 @@
-module.exports.sectionBeginnerData = [
+module.exports.sectionOneTest = [
   {
     title: 'beginner',
-    lessons: ['64645efaa175038f2db22cdc', '64645efaa175038f2db22ce8'],
+    lessons: ['64c0957033d6384950b1f9ee'],
   },
 ];

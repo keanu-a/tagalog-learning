@@ -8,11 +8,10 @@ import normalizeString from '../../utils/normalizeString';
 
 // wordData has attributes like
 // - english ''
-// - examples (array)
-// - partOfSpeech ''
-// - root ''
-// - stress { letter: '', place: Number }
 // - tagalog ''
+// - root ''
+// - partOfSpeech ''
+// - examples (array)
 // - _id ''
 
 function Word() {

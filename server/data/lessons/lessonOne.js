@@ -1,3 +1,78 @@
+module.exports.lessonOneTest = [
+  {
+    title: 'Introduce Yourself',
+    questions: [
+      {
+        questionType: 'choose-word',
+        // ako
+        word: '64be1b8b44afae50efbb1395',
+        // ikaw, ako, siya, ang
+        options: [
+          '64be1b8b44afae50efbb1396',
+          '64be1b8b44afae50efbb1395',
+          '64be1b8b44afae50efbb1398',
+          '64be1b8b44afae50efbb139d',
+        ],
+        answer: 1,
+      },
+      {
+        questionType: 'choose-word',
+        // ikaw
+        word: '64be1b8b44afae50efbb1396',
+        // ano, siya, niya
+        options: [
+          '64be1b8b44afae50efbb139f',
+          '64be1b8b44afae50efbb1398',
+          '64be1b8b44afae50efbb139b',
+          '64be1b8b44afae50efbb1396',
+        ],
+        answer: 3,
+      },
+      {
+        questionType: 'answer-phrase',
+        // Ano ang pangalan mo?
+        phrase: '64c07c1171a753406f21fe2a',
+        // Ako si {name}
+        // Nagtatrabaho ako sa ospital
+        options: ['64c07c1171a753406f21fe2b', '64c07c1171a753406f21fe2d'],
+        answer: 0,
+      },
+      {
+        questionType: 'fill-blank',
+        // Ano ang pangalan mo?
+        phrase: '64c07c1171a753406f21fe2a',
+        hideWord: 2,
+        // trabaho, ospital, pangalan, kaibigan
+        options: [
+          '64be1b8b44afae50efbb13ac',
+          '64bf0f1da71ae3a6a66ef390',
+          '64be1b8b44afae50efbb13a2',
+          '64be1b8b44afae50efbb13a7',
+        ],
+        answer: 2,
+      },
+      {
+        questionType: 'translate-phrase',
+        // Nagtatrabaho ako sa ospital
+        phrase: '64c07c1171a753406f21fe2d',
+        // ka, nag-aaral
+        options: ['64be1b8b44afae50efbb1397', '64be1b8b44afae50efbb13b1'],
+      },
+      {
+        questionType: 'conjugate',
+        // Nag-aral ka. Nag-aaral ako
+        phrase: '64c082f4c6f5156fdb33b529',
+        // Nagtrabaho, siya, nagtuturo
+        options: [
+          '64be1b8b44afae50efbb13b5',
+          '64be1b8b44afae50efbb1398',
+          '64beceaa7285c7c47fb56525',
+        ],
+      },
+    ],
+  },
+];
+
 module.exports.lessonOneLessonData = [
   {
     title: 'basics',
