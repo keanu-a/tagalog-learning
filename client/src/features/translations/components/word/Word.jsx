@@ -39,6 +39,8 @@ function Word() {
 
   return (
     <div className={styles.container}>
+      {console.log(wordData)}
+
       <div>
         <h3 className={styles.tagalog}>{normalizeString(wordData.tagalog)}</h3>
         <div className={styles.translation}>
