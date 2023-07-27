@@ -121,7 +121,7 @@ function isVowel(letter) {
   return vowels.includes(letter.toLowerCase());
 }
 
-function validateAccents(accents) {
+function validateAccents(accents, fieldType) {
   if (Array.isArray(accents)) {
     let containsLetterPosition = true;
     let letterIsVowel = true;
@@ -143,22 +143,24 @@ function validateAccents(accents) {
 
     // If not all elements are objects, error
     if (!areAllElementsObjects)
-      throw new Error(
-        'Not all elements in the accents field array are objects'
-      );
+      throw new Error(`All elements in "${fieldType}" accents must be objects`);
 
     // If an element doesnt contain a letter or a position, error
     if (!containsLetterPosition)
       throw new Error(
-        'Not all object elements have a letter of type string and position of type number'
+        `All objects in "${fieldType}" accents must have a letter of type string and position of type number`
       );
 
     // If a letter isn't a vowel, error
     if (!letterIsVowel)
-      throw new Error('All letters in the accents array should be vowels');
+      throw new Error(
+        `All letters in "${fieldType}" accents array must be vowels`
+      );
   } else if (typeof accents !== 'object') {
     // If the accents field isnt an array or an object, error
-    throw new Error('Accents field is not an array of objects or an object');
+    throw new Error(
+      `Accents in "${fieldType}" is not an array of objects or an object`
+    );
   }
 
   // If it is an object, check if it has a letter of type string and position of type number
@@ -167,12 +169,12 @@ function validateAccents(accents) {
     typeof accents.position !== 'number'
   ) {
     throw new Error(
-      'Accent object does not have a letter of type string and position of type number'
+      `Accents in "${fieldType}" does not have a letter of type string and position of type number`
     );
   }
 
   if (!isVowel(accents.letter)) {
-    throw new Error('Letter should be a vowel');
+    throw new Error(`Letter must be a vowel in "${fieldType}" accents`);
   }
 }
 
@@ -205,9 +207,9 @@ WordSchema.pre('save', function (next) {
 // This middleware function checks the conjugations accents field
 WordSchema.pre('save', function (next) {
   try {
-    validateAccents(this.conjugations.past.accents);
-    validateAccents(this.conjugations.present.accents);
-    validateAccents(this.conjugations.future.accents);
+    validateAccents(this.conjugations.past.accents, 'past');
+    validateAccents(this.conjugations.present.accents, 'present');
+    validateAccents(this.conjugations.future.accents, 'future');
   } catch (err) {
     next(err);
   }
@@ -216,7 +218,7 @@ WordSchema.pre('save', function (next) {
 // This middleware function checks the accents field
 WordSchema.pre('save', function (next) {
   try {
-    validateAccents(this.accents);
+    validateAccents(this.accents, 'word');
   } catch (err) {
     next(err);
   }
