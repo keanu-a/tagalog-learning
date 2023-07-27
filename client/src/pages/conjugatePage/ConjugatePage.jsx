@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Navbar from '../../components/navbar/Navbar';
-import PageHeader from '../../components/pageHeader/PageHeader';
+import Navbar from '../../layouts/navbar/Navbar';
+import PageHeader from '../../layouts/pageHeader/PageHeader';
 
 import './Conjugate.scss';
 

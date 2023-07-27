@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import PageHeader from '../../layouts/pageHeader/PageHeader';
+
 import Loading from '../../components/loading/Loading';
-import PageHeader from '../../components/pageHeader/PageHeader';
 
 import styles from './SectionPage.module.css';
 

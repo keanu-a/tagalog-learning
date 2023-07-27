@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 
-import Navbar from '../../components/navbar/Navbar';
-import PageHeader from '../../components/pageHeader/PageHeader';
+import Navbar from '../../layouts/navbar/Navbar';
+import PageHeader from '../../layouts/pageHeader/PageHeader';
+
 import Carousel from '../../components/carousel/Carousel';
 import Map from '../../components/map/Map';
 

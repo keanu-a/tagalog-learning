@@ -31,7 +31,8 @@
 }
 
 .english h5 {
-  background-color: var(--color-brand--2);
+  background-color: var(--color-brand--1);
+  color: #fff;
   padding: 0 0.8rem;
   border-radius: 20px;
 }

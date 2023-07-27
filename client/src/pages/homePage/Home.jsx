@@ -13,12 +13,13 @@ import {
   MdFlare,
 } from 'react-icons/md';
 
+import Navbar from '../../layouts/navbar/Navbar';
+
 import Card from '../../components/card/Card';
-import Navbar from '../../components/navbar/Navbar';
 import HowSection from '../../components/howSection/HowSection';
+import SearchBar from '../../components/searchBar/SearchBar';
 
 import styles from './Home.module.css';
-import SearchBar from '../../components/searchBar/SearchBar';
 
 const ICON_SIZE = 80;
 

@@ -7,7 +7,8 @@ import LessonPage from './pages/lessonPage/LessonPage';
 import SectionPage from './pages/sectionPage/SectionPage';
 import LoginPage from './pages/loginPage/LoginPage';
 import TranslatePage from './pages/translatePage/TranslatePage';
-import Word from './components/word/Word';
+
+import Word from './features/translations/components/word/Word';
 
 const router = createBrowserRouter([
   {

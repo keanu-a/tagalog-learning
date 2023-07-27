@@ -1,10 +1,11 @@
 import { Outlet } from 'react-router-dom';
 
-import Navbar from '../../components/navbar/Navbar';
-import PageHeader from '../../components/pageHeader/PageHeader';
+import Navbar from '../../layouts/navbar/Navbar';
+import PageHeader from '../../layouts/pageHeader/PageHeader';
+
+import SearchBar from '../../components/searchBar/SearchBar';
 
 import styles from './TranslatePage.module.css';
-import SearchBar from '../../components/searchBar/SearchBar';
 
 function TranslatePage() {
   return (

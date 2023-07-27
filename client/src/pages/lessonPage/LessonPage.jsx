@@ -6,14 +6,14 @@ import styles from './LessonPage.module.css';
 import Logo from '../../components/logo/Logo';
 import Loading from '../../components/loading/Loading';
 
-import ChooseWord from '../../components/lessonComponents/chooseWord/ChooseWord';
-import FillBlank from './fillBlank/FillBlank';
-import Conjugate from './conjugate/Conjugate';
+import ChooseWord from '../../features/lessons/components/chooseWord/ChooseWord';
+import FillBlank from '../../features/lessons/components/fillBlank/FillBlank';
+import Conjugate from '../../features/lessons/components/conjugate/Conjugate';
 
-import LessonStart from '../../components/lessonComponents/lessonStart/LessonStart';
-import CheckButton from '../../components/lessonComponents/CheckButton';
-import NextButton from '../../components/lessonComponents/NextButton';
-import Options from '../../components/lessonComponents/options/Options';
+import LessonStart from '../../features/lessons/components/lessonStart/LessonStart';
+import CheckButton from '../../features/lessons/components/CheckButton';
+import NextButton from '../../features/lessons/components/NextButton';
+import Options from '../../features/lessons/components/options/Options';
 
 const initialState = {
   questions: [],

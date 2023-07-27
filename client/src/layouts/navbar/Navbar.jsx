@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
-import Logo from '../logo/Logo';
+import Logo from '../../components/logo/Logo';
 import styles from './Navbar.module.css';
 
 const navLinks = [

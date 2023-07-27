@@ -2,16 +2,15 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styles from './Word.module.css';
-import Loading from '../loading/Loading';
+import Loading from '../../../../components/loading/Loading';
 
-import normalizeString from '../../utils/normalizeString';
+import normalizeString from '../../../../utils/normalizeString';
 
 // wordData has attributes like
-// - english ''
 // - tagalog ''
+// - english ['']
 // - root ''
 // - partOfSpeech ''
-// - examples (array)
 // - _id ''
 
 function Word() {
@@ -30,7 +29,7 @@ function Word() {
         console.error(err.message);
       })
       .finally(() => {
-        isLoading(false);
+        setIsLoading(false);
       });
   }, []);
 
