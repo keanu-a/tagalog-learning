@@ -19,6 +19,7 @@ const Lesson = require('./models/Lesson.js');
 const Section = require('./models/Section.js');
 
 const { wordData } = require('./data/words/words.js');
+const { testWords } = require('./data/words/lessonOneWords.js');
 
 const { phraseData } = require('./data/phrases/phrases.js');
 const { test } = require('./data/phrases/lessonOnePhrases.js');
@@ -54,13 +55,20 @@ mongoose
     useUnifiedTopology: true,
     dbName: 'tagalog-learning',
   })
-  .then(() => {
+  .then(async () => {
     app.listen(port, () => console.log(`Server running on port ${port}`));
 
     // Inserting data, REMEMBER comment out
 
     // INSERTING LESSON ONE WORD DATA 5/10
-    // Word.insertMany(wordData).then(() =>
+    for (const word of testWords) {
+      const newWord = new Word(word);
+      await newWord.save();
+    }
+
+    console.log('Words added to the database');
+
+    // Word.insertMany(testWords).then(() =>
     //   console.log('Words were added to the database!')
     // );
 
@@ -76,4 +84,4 @@ mongoose
     //   console.log('Sections were added to the database!')
     // );
   })
-  .catch((error) => console.log(`${error} did not connect`));
+  .catch((error) => console.log(error.message));
