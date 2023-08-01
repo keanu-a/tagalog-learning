@@ -83,5 +83,18 @@ mongoose
     // Section.insertMany(sectionOneTest).then(() =>
     //   console.log('Sections were added to the database!')
     // );
+
+    // UPDATING WORD AND PHRASE AUDIO
+    // try {
+    //   const word = await Word.findById(wordId);
+    //   if (!word) {
+    //     console.log(`Word with ID ${wordId} not found.`);
+    //     return;
+    //   }
+
+    //   await word.updateAudioUrls(audioUrl);
+    // } catch (error) {
+    //   console.error('Error updating word audio URL:', error);
+    // }
   })
   .catch((error) => console.log(error.message));

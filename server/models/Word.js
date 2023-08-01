@@ -112,6 +112,20 @@ const WordSchema = new mongoose.Schema({
   },
 });
 
+/****************/
+/* WORD METHODS */
+/****************/
+
+WordSchema.methods.updateAudioUrls = async function (audioUrl) {
+  try {
+    this.audioUrl = audioUrl;
+    await this.save();
+  } catch (error) {
+    console.error('Error updating audio URL: ', error);
+    throw error;
+  }
+};
+
 /************************************/
 /* HELPER FUNCTIONS FOR MIDDLEWARES */
 /************************************/
