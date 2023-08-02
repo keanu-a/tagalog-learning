@@ -5,58 +5,58 @@ module.exports.lessonOneTest = [
       {
         questionType: 'choose-word',
         // ako
-        word: '64be1b8b44afae50efbb1395',
+        word: '64c863c369d4defa895e43fb',
         // ikaw, ako, siya, ang
         options: [
-          '64be1b8b44afae50efbb1396',
-          '64be1b8b44afae50efbb1395',
-          '64be1b8b44afae50efbb1398',
-          '64be1b8b44afae50efbb139d',
+          '64c863c369d4defa895e4402',
+          '64c863c369d4defa895e43fb',
+          '64c863c369d4defa895e4408',
+          '64c863c469d4defa895e4417',
         ],
         answer: 1,
       },
       {
         questionType: 'choose-word',
         // ikaw
-        word: '64be1b8b44afae50efbb1396',
-        // ano, siya, niya
+        word: '64c863c369d4defa895e4402',
+        // ano, siya, niya, ikaw
         options: [
-          '64be1b8b44afae50efbb139f',
-          '64be1b8b44afae50efbb1398',
-          '64be1b8b44afae50efbb139b',
-          '64be1b8b44afae50efbb1396',
+          '64c863c469d4defa895e441d',
+          '64c863c369d4defa895e4408',
+          '64c863c469d4defa895e4411',
+          '64c863c369d4defa895e4402',
         ],
         answer: 3,
       },
       {
         questionType: 'answer-phrase',
-        // Ano ang pangalan mo?
-        phrase: '64c07c1171a753406f21fe2a',
+        // Anong pangalan mo?
+        phrase: '64c8747d3a3feaa4f7fbd93d',
         // Ako si {name}
         // Nagtatrabaho ako sa ospital
-        options: ['64c07c1171a753406f21fe2b', '64c07c1171a753406f21fe2d'],
+        options: ['64c8747d3a3feaa4f7fbd93f', '64c8747d3a3feaa4f7fbd941'],
         answer: 0,
       },
       {
         questionType: 'fill-blank',
-        // Ano ang pangalan mo?
-        phrase: '64c07c1171a753406f21fe2a',
+        // Anong pangalan mo?
+        phrase: '64c8747d3a3feaa4f7fbd93d',
         hideWord: 2,
         // trabaho, ospital, pangalan, kaibigan
         options: [
-          '64be1b8b44afae50efbb13ac',
-          '64bf0f1da71ae3a6a66ef390',
-          '64be1b8b44afae50efbb13a2',
-          '64be1b8b44afae50efbb13a7',
+          '64c863c569d4defa895e4444',
+          '64c863c669d4defa895e446b',
+          '64c863c469d4defa895e4426',
+          '64c863c569d4defa895e4435',
         ],
         answer: 2,
       },
       {
         questionType: 'translate-phrase',
         // Nagtatrabaho ako sa ospital
-        phrase: '64c07c1171a753406f21fe2d',
+        phrase: '64c8747d3a3feaa4f7fbd941',
         // ka, nag-aaral
-        options: ['64be1b8b44afae50efbb1397', '64be1b8b44afae50efbb13b1'],
+        options: ['64c863c369d4defa895e4405', '64c863c669d4defa895e444d'],
       },
       {
         questionType: 'conjugate',
@@ -68,6 +68,13 @@ module.exports.lessonOneTest = [
           '64be1b8b44afae50efbb1398',
           '64beceaa7285c7c47fb56525',
         ],
+      },
+      {
+        questionType: 'formal-phrase',
+        // Ano po ang pangalan ninyo?
+        phrase: '64c8747d3a3feaa4f7fbd93e',
+        // mo, kaibigan
+        options: ['64c863c469d4defa895e440e', '64c863c569d4defa895e4435'],
       },
     ],
   },

@@ -296,9 +296,10 @@ module.exports.lessonOneWordData = [
   },
   {
     tagalog: 'ng',
-    english: ['of', 'Also used to conjunct a verb or adjective to an object'],
+    english: ['of', 'a'],
     root: 'ng',
     partOfSpeech: 'article',
+    note: 'Also used to conjunct two words together',
   },
   {
     tagalog: 'araw',
@@ -327,5 +328,21 @@ module.exports.lessonOneWordData = [
     root: 'gabi',
     partOfSpeech: 'noun',
     accents: 3,
+  },
+  {
+    tagalog: 'anong',
+    english: 'what',
+    root: 'ano',
+    partOfSpeech: 'interrogative',
+    accents: 2,
+    note: 'ano + ang',
+  },
+  {
+    tagalog: 'magandang',
+    english: ['beautiful', 'good', 'pretty'],
+    root: 'ganda',
+    partOfSpeech: 'adjective',
+    accents: 6,
+    note: 'maganda + ng',
   },
 ];

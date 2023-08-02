@@ -17,6 +17,7 @@ const LessonSchema = new mongoose.Schema({
           'fill-blank',
           'translate-phrase',
           'conjugate',
+          'formal-phrase',
         ],
       },
       word: {
@@ -68,7 +69,8 @@ const LessonSchema = new mongoose.Schema({
           validator: function () {
             return (
               this.questionType !== 'conjugate' &&
-              this.questionType !== 'translate-phrase'
+              this.questionType !== 'translate-phrase' &&
+              this.questionType !== 'formal-phrase'
             );
           },
           message:

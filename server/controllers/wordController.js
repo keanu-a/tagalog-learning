@@ -90,16 +90,3 @@ module.exports.getWords = async (req, res) => {
     res.status(400).json({ status: 'fail', message: error.message });
   }
 };
-
-module.exports.createWord = async (req, res) => {
-  try {
-    const newWord = await Word.create(req.body);
-
-    req.status(201).json({
-      status: 'success',
-      word: newWord,
-    });
-  } catch (error) {
-    res.status(400).json({ status: 'fail', message: error.message });
-  }
-};

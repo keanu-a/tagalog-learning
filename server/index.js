@@ -11,6 +11,7 @@ const phraseRoutes = require('./routes/phraseRoutes.js');
 const lessonRoutes = require('./routes/lessonRoutes.js');
 const sectionRoutes = require('./routes/sectionRoutes.js');
 const userRoutes = require('./routes/userRoutes.js');
+const audioRoutes = require('./routes/audioRoutes.js');
 
 //* FOR IMPORTING DATA *//
 const Word = require('./models/Word.js');
@@ -19,7 +20,6 @@ const Lesson = require('./models/Lesson.js');
 const Section = require('./models/Section.js');
 
 const { wordData } = require('./data/words/words.js');
-const { testWords } = require('./data/words/lessonOneWords.js');
 
 const { phraseData } = require('./data/phrases/phrases.js');
 const { test } = require('./data/phrases/lessonOnePhrases.js');
@@ -46,6 +46,7 @@ app.use('/api/v1/phrase', phraseRoutes);
 app.use('/api/v1/lesson', lessonRoutes);
 app.use('/api/v1/section', sectionRoutes);
 app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/audio', audioRoutes);
 
 //* MONGOOSE AND SERVER SETUP *//
 const port = process.env.PORT || 9000;
@@ -60,17 +61,12 @@ mongoose
 
     // Inserting data, REMEMBER comment out
 
-    // INSERTING LESSON ONE WORD DATA 5/10
-    for (const word of testWords) {
-      const newWord = new Word(word);
-      await newWord.save();
-    }
-
-    console.log('Words added to the database');
-
-    // Word.insertMany(testWords).then(() =>
-    //   console.log('Words were added to the database!')
-    // );
+    // INSERTING LESSON ONE WORD DATA
+    // for (const word of wordData) {
+    //   const newWord = new Word(word);
+    //   await newWord.save();
+    // }
+    // console.log('Words added to the database');
 
     // Phrase.insertMany(test).then(() =>
     //   console.log('Phrases were added to the database!')

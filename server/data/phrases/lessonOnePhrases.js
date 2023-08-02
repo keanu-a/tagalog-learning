@@ -1,46 +1,56 @@
-module.exports.lessonOnePhraseTest = [
+module.exports.test = [
   {
-    tagalog: 'Ano ang pangalan mo?',
+    tagalog: 'Anong pangalan mo?',
     english: 'What is your name?',
     words: [
-      '64be1b8b44afae50efbb139f',
-      '64be1b8b44afae50efbb139d',
-      '64be1b8b44afae50efbb13a2',
-      '64be1b8b44afae50efbb139a',
+      '64c866f388b8adbffafdf79e',
+      '64c863c469d4defa895e4426',
+      '64c863c469d4defa895e440e',
+    ],
+  },
+  {
+    tagalog: 'Ano po ang pangalan ninyo?',
+    english: 'What is your name?',
+    words: [
+      '64c863c469d4defa895e441d',
+      '64c863c669d4defa895e4458',
+      '64c863c469d4defa895e4417',
+      '64c863c469d4defa895e4426',
+      '64c863c669d4defa895e4461',
     ],
   },
   {
     tagalog: 'Ako si {name}.',
     english: 'I am {name}.',
-    words: ['64be1b8b44afae50efbb1395', '64be1b8b44afae50efbb139c'],
+    words: ['64c863c369d4defa895e43fb', '64c863c469d4defa895e4414'],
   },
   {
     tagalog: 'Nag-aaral ako sa {school}.',
     english: 'I study at the {school}.',
     words: [
-      '64be1b8b44afae50efbb13b1',
-      '64be1b8b44afae50efbb1395',
-      '64be1b8b44afae50efbb13aa',
+      '64c863c669d4defa895e444d',
+      '64c863c369d4defa895e43fb',
+      '64c863c569d4defa895e443e',
     ],
   },
   {
     tagalog: 'Nagtatrabaho ako sa ospital.',
     english: 'I work at the hospital.',
     words: [
-      '64be1b8b44afae50efbb13b6',
-      '64be1b8b44afae50efbb1395',
-      '64be1b8b44afae50efbb13aa',
-      '64bf0f1da71ae3a6a66ef390',
+      '64c863c669d4defa895e4454',
+      '64c863c369d4defa895e43fb',
+      '64c863c569d4defa895e443e',
+      '64c863c669d4defa895e446b',
     ],
   },
   {
     tagalog: 'Nag-aral ka. Nag-aaral ako',
     english: 'You studied. I am studying',
     words: [
-      '64be1b8b44afae50efbb13b0',
-      '64be1b8b44afae50efbb1397',
-      '64be1b8b44afae50efbb13b1',
-      '64be1b8b44afae50efbb1395',
+      '64c863c669d4defa895e444c',
+      '64c863c369d4defa895e4405',
+      '64c863c669d4defa895e444d',
+      '64c863c369d4defa895e43fb',
     ],
   },
 ];
