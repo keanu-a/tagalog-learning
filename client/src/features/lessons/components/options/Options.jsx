@@ -1,6 +1,6 @@
 import styles from './Options.module.css';
 
-import playAudio from '../../services/playAudio';
+import playAudio from '../../../../services/playAudio';
 
 function Options({
   question,
