@@ -22,7 +22,6 @@ const Section = require('./models/Section.js');
 const { wordData } = require('./data/words/words.js');
 
 const { phraseData } = require('./data/phrases/phrases.js');
-const { test } = require('./data/phrases/lessonOnePhrases.js');
 
 const { lessonOneTest } = require('./data/lessons/lessonOne.js');
 
@@ -68,9 +67,9 @@ mongoose
     // }
     // console.log('Words added to the database');
 
-    // Phrase.insertMany(test).then(() =>
-    //   console.log('Phrases were added to the database!')
-    // );
+    Phrase.insertMany(phraseData).then(() =>
+      console.log('Phrases were added to the database!')
+    );
 
     // Lesson.insertMany(lessonOneTest).then(() =>
     //   console.log('Lessons were added to the database!')

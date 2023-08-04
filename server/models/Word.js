@@ -94,13 +94,12 @@ const WordSchema = new mongoose.Schema({
     },
     required: this.partOfSpeech === 'verb',
   },
-  examples: {
-    type: [mongoose.Types.ObjectId],
-    ref: 'Phrase',
-    default: undefined,
-  },
   audioUrl: {
     type: String,
+    unique: true,
+    default: function () {
+      return this.tagalog;
+    },
   },
   note: {
     type: String,
@@ -108,6 +107,11 @@ const WordSchema = new mongoose.Schema({
   },
   accents: {
     type: mongoose.Schema.Types.Mixed,
+    default: undefined,
+  },
+  examples: {
+    type: [mongoose.Types.ObjectId],
+    ref: 'Phrase',
     default: undefined,
   },
 });

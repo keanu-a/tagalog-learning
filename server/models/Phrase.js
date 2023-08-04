@@ -14,6 +14,10 @@ const PhraseSchema = new mongoose.Schema({
     ref: 'Word',
     required: [true, 'Phrase must have word references it uses.'],
   },
+  audioUrl: {
+    type: String,
+    unique: true,
+  },
 });
 
 const Phrase = new mongoose.model('Phrase', PhraseSchema);
