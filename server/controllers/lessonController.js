@@ -6,19 +6,15 @@ module.exports.getLesson = async (req, res) => {
     const foundLesson = await Lesson.findOne({ title: lessonTitle })
       .populate({
         path: 'questions.word',
-        select: 'tagalog english partOfSpeech',
+        select: 'tagalog english partOfSpeech audioUrl',
       })
       .populate({
         path: 'questions.phrase',
-        select: 'tagalog english words',
+        select: 'tagalog english words audioUrl',
       })
       .populate({
         path: 'questions.options',
-        select: 'tagalog english partOfSpeech',
-        // populate: {
-        //   path: 'conjugations',
-        //   select: 'past present future',
-        // },
+        select: 'tagalog english partOfSpeech audioUrl',
       });
 
     // If word found, return word

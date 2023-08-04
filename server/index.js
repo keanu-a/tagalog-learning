@@ -67,9 +67,9 @@ mongoose
     // }
     // console.log('Words added to the database');
 
-    Phrase.insertMany(phraseData).then(() =>
-      console.log('Phrases were added to the database!')
-    );
+    // Phrase.insertMany(phraseData).then(() =>
+    //   console.log('Phrases were added to the database!')
+    // );
 
     // Lesson.insertMany(lessonOneTest).then(() =>
     //   console.log('Lessons were added to the database!')

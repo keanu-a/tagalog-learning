@@ -1,5 +1,7 @@
 import styles from './Options.module.css';
 
+import playAudio from '../../services/playAudio';
+
 function Options({
   question,
   dispatch,
@@ -27,7 +29,10 @@ function Options({
           } ${disableButtonsUpdateColors(idx)} ${
             selectedOption === idx && styles.clicked
           }`}
-          onClick={() => dispatch({ type: 'clicked', payload: idx })}
+          onClick={() => {
+            dispatch({ type: 'clicked', payload: idx });
+            playAudio(option.audioUrl);
+          }}
         >
           {option.tagalog}
         </button>

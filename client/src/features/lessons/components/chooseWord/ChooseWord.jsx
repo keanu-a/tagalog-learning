@@ -1,30 +1,38 @@
 import styles from './ChooseWord.module.css';
 
 const ChooseWord = ({ question }) => {
-  let moreEnglish;
+  let english;
+  let moreThanOneEnglishTranslation = false;
 
-  if (question.word.english.length > 0) {
-    moreEnglish = question.word.english.slice(1);
+  if (Array.isArray(question.word.english)) {
+    english = question.word.english[0];
+    moreThanOneEnglishTranslation = true;
+  } else {
+    english = question.word.english;
+    moreThanOneEnglishTranslation = false;
   }
 
   return (
     <div className={styles.chooseWord}>
       <div className={styles.prompt}>Choose the correct translation</div>
-      <div className={styles.question}>
-        <span>How do you say</span>
-        <div className={styles.wordContainer}>
-          <span className={styles.word}>{question.word.english[0]}</span>
 
-          {moreEnglish.length !== 0 && (
+      <div className={styles.question}>
+        <span>How do you say this word in Tagalog?</span>
+
+        <div className={styles.wordContainer}>
+          <span className={styles.word}>
+            {!moreThanOneEnglishTranslation ? english : english[0]}
+          </span>
+
+          {moreThanOneEnglishTranslation && (
             <span className={styles.moreEnglish}>
               Also:
-              {moreEnglish.map((eng, idx) => (
+              {question.word.english.map((eng, idx) => (
                 <p key={idx}>{eng}</p>
               ))}
             </span>
           )}
         </div>
-        <span>in Tagalog?</span>
       </div>
     </div>
   );
