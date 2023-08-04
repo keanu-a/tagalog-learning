@@ -1,6 +1,8 @@
 const express = require('express');
-const AWS = require('aws-sdk');
+const { getAudio } = require('../controllers/audioController.js');
 
 const router = express.Router();
+
+router.get('/:audioUrl', getAudio);
 
 module.exports = router;
