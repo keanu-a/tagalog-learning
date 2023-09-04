@@ -31,7 +31,7 @@ function Options({
           }`}
           onClick={() => {
             dispatch({ type: 'clicked', payload: idx });
-            playAudio(option.audioUrl);
+            // playAudio(option.audioUrl);
           }}
         >
           {option.tagalog}

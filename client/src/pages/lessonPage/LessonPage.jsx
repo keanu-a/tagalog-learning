@@ -7,6 +7,7 @@ import Logo from '../../components/logo/Logo';
 import Loading from '../../components/loading/Loading';
 
 import ChooseWord from '../../features/lessons/components/chooseWord/ChooseWord';
+import AnswerPhrase from '../../features/lessons/components/answerPhrase/AnswerPhrase';
 import FillBlank from '../../features/lessons/components/fillBlank/FillBlank';
 import Conjugate from '../../features/lessons/components/conjugate/Conjugate';
 
@@ -137,7 +138,7 @@ const LessonPage = () => {
           )}
 
           {questions[questionIdx].questionType === 'answer-phrase' && (
-            <p>Answer Phrase</p>
+            <AnswerPhrase question={questions[questionIdx]} />
           )}
 
           {questions[questionIdx].questionType === 'fill-blank' && (

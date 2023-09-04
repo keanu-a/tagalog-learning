@@ -39,16 +39,16 @@ function Word() {
 
   return (
     <div className={styles.container}>
-      {console.log(wordData)}
-
       <div>
-        <h3 className={styles.tagalog}>{normalizeString(wordData.tagalog)}</h3>
+        <h3 className={styles.tagalog}>{wordData.tagalog}</h3>
         <div className={styles.translation}>
           <h5>English: </h5>
           <div className={styles.english}>
-            {wordData.english.map((word, idx) => (
-              <h5 key={idx}>{word}</h5>
-            ))}
+            {Array.isArray(wordData.english) ? (
+              wordData.english.map((word, idx) => <h5 key={idx}>{word}</h5>)
+            ) : (
+              <h5>{wordData.english}</h5>
+            )}
           </div>
         </div>
 
@@ -59,13 +59,9 @@ function Word() {
       {wordData.partOfSpeech === 'verb' && (
         <ul className={styles.tenses}>
           <h5 className={styles.conjugations}>Conjugations</h5>
-          <li>PAST: {normalizeString(wordData.conjugations.past.tagalog)}</li>
-          <li>
-            PRESENT: {normalizeString(wordData.conjugations.present.tagalog)}
-          </li>
-          <li>
-            FUTURE: {normalizeString(wordData.conjugations.future.tagalog)}
-          </li>
+          <li>PAST: {wordData.conjugations.past.tagalog}</li>
+          <li>PRESENT: {wordData.conjugations.present.tagalog}</li>
+          <li>FUTURE: {wordData.conjugations.future.tagalog}</li>
         </ul>
       )}
     </div>
